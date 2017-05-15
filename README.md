@@ -49,7 +49,7 @@ Clicking on the "See our pets" link, users can view the pets that are available 
 
 ![alt text](screenshots/shelterpets.png "Shelter pets")
 
-## <a name="features"></a>Installation
+## <a name="install"></a>Installation
 To run PAWS Finder:
 
 Install PostgreSQL (Mac OSX)
