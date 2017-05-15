@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+    <h2>Your Search: {{ sizes[size].capitalize() }} {{ genders[gender] }} {{ breed.lower() }} {{ animal }} in location {{ location }}.</h2>
+    <span id="save-status"> Check to save this search
+    <input id="save-box" type="checkbox" name="searches" value="Yes"/>
+  </span>
+  <br>  
+  <p> Click the blue heart button to add to your saved paws.  The green hearts are your saved pets.</p> 
+  <br>
+
+  <div id="save-search-form">
+      <form action="/save-search.json" method="POST">
+        <label>
+             Title <input id="saved-title" type="text" name="title" required>
+        </label>
+        <label>
+            Description <input id="saved-description" type="text" name="description">
+        </label>
+      <input id="save-search-button" type="submit" value="Save"> 
+      </form>
+    </p>
+  </div>
+  <div class="row">
+    {% if "user_id" in session %}  
+        {% for pet in pets %}
+
+          <div id="img-height" class="img-rounded col-xs-12 col-md-6 col-lg-4">
+           <!--   Like button code include data attributes,enabling users to save a specific pet    -->
+            <button type="button" {% if pet.id in liked_petid %}
+            class="btn btn-success btn-xs active like fa-beat" 
+            {% else %}
+            class="btn btn-primary btn-xs active like" 
+            {% endif %}
+
+            id="{{ pet.id }}"
+
+              data-shelterId="{{ pet.shelterId }}" 
+              data-animal="{{ pet.animal }}"  
+              data-petname="{{ pet.name }}"
+              data-breeds="{{ pet.breeds }}"
+              data-age="{{ pet.age }}"
+              data-gender="{{ pet.sex }}"
+              data-petid="{{ pet.id }}"
+              data-size="{{ pet.size }}"
+              data-description="{{ pet.description }}"
+              data-lastupdate="{{ pet.lastUpdate }}">
+
+            <span class="glyphicon glyphicon-heart"></span>
+            </button> 
+
+            Hi, my name is {{ pet.name.capitalize() }}! 
+            <a href="#" id="learn-more-{{ pet.id }}">Learn more about me.</a>
+            <br>
+  
+        <div class="modal fade 5" id="learn-more-modal-{{ pet.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle">Meet {{ pet.name }}</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {{ pet.description }}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+            Interested in adopting me? 
+                <a href="mailto:{{ pet.contact['email'] }}">Contact my shelter.</a><br><br>
+          {% if pet["photos"] | length >= 4 %} 
+          <!-- this is the jinja  way for finding length -->
+                <img id="pet-img" class="img-responsive img-rounded" src = "{{ pet.photos[3]['url']}}"><br><br> 
+            {% endif %}  
+            </div> 
+          {% endfor %}
+      {% endif %}           
+    </div>  
+</div>
+
+<!-- <!- Revisit and fix -->
+<script type="text/javascript"> 
+  function learnMore(number) {
+  $("#learn-more"+"-"+number).on("click", function(){
+    $("#learn-more-modal"+"-"+number).modal("show");
+  });
+}
+ {% for pet in pets %}
+  learnMore({{ pet.id }})
+ {% endfor %}
+</script>
+
+
+
+{% endblock %}

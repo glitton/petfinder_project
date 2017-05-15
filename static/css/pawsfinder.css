@@ -1,0 +1,158 @@
+/*
+ * Start Bootstrap - Heroic Features (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+
+
+/* navbar */
+.navbar-inverse {
+  background-color: #373F51;
+  border-color: #1B1B1E;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+  background-color: #373F51 !important;
+}
+
+/* style for modals */
+#login-modal, #shelter-modal {
+  text-align: center;
+
+}
+
+#zipcode-field {
+  text-align: left;
+
+}
+
+.modal-header {
+  background-color: #044389
+
+}
+
+.modal-title {
+  color: #fff;
+  text-align: center;
+
+}
+
+.close {
+  color: #fff;
+  opacity: 1;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Gochi Hand', cursive;
+  color: #373F51;
+
+} 
+
+body {
+    padding-top: 70px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.hero-spacer {
+    margin-top: 50px;
+}
+
+.hero-feature {
+    margin-bottom: 30px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+/*Homepage carousel*/
+.carousel-inner > .item > img {
+    margin: 0 auto;
+    height: auto;
+}
+
+.carousel-control.right, .carousel-control.left {
+  border-radius: 6px;
+}
+/*Carousel image sizes*/
+.item img {
+  width: 760px !important;
+  height: 500px !important;
+}
+/*Hide form in home page for users not logged in*/
+.hidden { 
+        display:none;
+}
+
+.flash-center {
+    text-align: center;
+    font-weight: bold;
+}
+
+.breeds {
+    width: 150px;   
+}
+
+label {
+    font-weight: normal !important;
+
+} 
+
+/*Button colors*/
+.btn-primary {
+  background-color: #044389;
+}
+
+/*Making pet pics all the same size*/
+#pet-img {
+    position: relative;
+    width:  350px;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}
+
+#img-height {
+  height: 400px;
+  overflow: hidden;
+}
+
+/* Animation for liked hearts */
+.fa-beat {
+  -webkit-animation: fa-beat 1s infinite linear;
+  animation: fa-beat 1s infinite linear;
+}
+@-webkit-keyframes fa-beat {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes fa-beat {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+
+

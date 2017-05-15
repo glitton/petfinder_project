@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+
+  <h2>QUICK SEARCH RESULTS</h2>
+
+
+  <p>You searched for a {{ genders[gender] }} {{ animal }} in location {{ location }}.
+  <p>For more advanced search criteria including age, breed, size, shelter location, and contact information, register for an account now.</p>
+  <br>
+  Here are your results: </p>
+
+  <div class="row">
+    {% for pet in pets %}
+    <div class="col-xs-12 col-md-6 col-lg-4">
+      {{ pet.name}} can be seen in shelter with the ID {{ pet.shelterId }} in {{ pet.contact.city }}. 
+        {% if pet["photos"] | length >= 4 %} 
+          <img src = "{{ pet.photos[3]['url']}}" />
+        {% endif %}
+      <br>
+    </div>
+    {% endfor %}
+  </div> 
+</div>
+{% endblock %}

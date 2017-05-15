@@ -1,0 +1,5 @@
+env/
+model.pyc
+server.pyc
+secrets.sh
+.DS_Store

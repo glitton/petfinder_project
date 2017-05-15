@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PAWS Finder</title>
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <!-- Bootstrap and Google js -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- my javascript -->
+  <script src="static/pawsfinder.js"></script> 
+  <script src="static/savedpaws.js"></script> 
+  <script src="static/shelters.js"></script> 
+  <script src="static/zipcode.js"></script>
+
+  <!-- Google Fonts -->
+ <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Open+Sans" rel="stylesheet">
+  
+  <!-- my CSS  -->
+  <link rel="stylesheet" type="text/css" href="static/css/pawsfinder.css">  
+  <!-- Favicon -->
+  <link rel="icon" href="static/img/paw-favicon.ico" type="image/gif" sizes="16x16">            
+</head>
+<body>
+
+<!-- Bootstrap navbar set up -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <img alt="Brand" src="static/img/paw.png" style="width:30px;height:22px;">
+      </a>
+    </div>
+    <ul class="nav navbar-nav navb">
+      <li class="active"><a href="/">Home</a></li>
+      
+    {% if 'user_id' in session %} 
+      <li class="active" id="saved-paws-link"><a href="#" id="saved-searches">Saved Paws</a></li>    
+      <li class="active" id="search-shelters-link"><a href="#" id="shelter-link">Search Shelters</a></li>
+    {% endif %}  
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#" id="register-link"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+      
+      {% if 'user_id' not in session %}
+        <li id="login-button"><a href="#" id="login-link"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+        <li id="logout-button" class="hidden"><a href="#" id="logout-link"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+      {% endif %}
+
+      {% if 'user_id' in session %}
+        <li id="logout-button"><a href="#" id="logout-link"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+        <li id="login-button" class="hidden"><a href="#" id="login-link"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+      {% endif %}> 
+    </ul>
+  </div>
+</nav>
+ 
+    {% for flash in get_flashed_messages() %}
+    <div class="flash-center">
+      {{ flash }} 
+    </div>
+    {% endfor %}
+
+<!-- SAVE SEARCH MODAL -->
+<div class="modal fade one" id="save-modal">
+  <div class="modal-dialog"  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Saved Searches And Likes</h3><br>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body one"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade two" tabindex="-1" role="dialog" id="login-modal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title">Log In</h3>
+      </div>
+        <div class="modal-body two">
+        <p id="login-error-message" hidden></p>
+          <form id="login-form">
+            <div class="form-group">
+              <input type="text" id="login-email-field" name="email" placeholder="Email"><br>
+            </div>
+            <div class="form-group">  
+              <input type="password" id="login-password-field" name="password" placeholder="Password"><br>  
+            </div>        
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                <button type="submit" class="form-control btn btn-login btn-primary" id="loginmodal-submit">Login</button>
+                </div>
+              </div>
+            </div>    
+          </form>  
+          <div class="login-help">
+            <a href="#">Register</a> - <a href="#">Forgot Password</a>
+          </div>
+        </div>
+    </div>/<!-- .modal-content -->
+  </div>/<!-- .modal-dialog -->
+</div><!--.modal  -->
+
+<!-- REGISTRATION MODAL -->
+<div class="modal fade three" id="register-modal">
+  <div class="modal-dialog"  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Register for an account with PAWS Finder</h2><br>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body three">
+        <form action="/process-registration" method="POST">
+          <div class="row">
+            <p id="registration-status"></p>
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                <input type="text" name="firstname" id="firstname-field" 
+                class="form-control input-sm" placeholder="First Name">
+                </div>
+              </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <div class="form-group">
+                <input type="text" name="lastname" id="lastname-field" 
+                class="form-control input-sm" placeholder="Last Name">
+              </div>
+            </div>
+          </div>
+
+        <div class="form-group">
+            <input type="email" name="email" id="email-field" 
+            class="form-control input-sm" placeholder="Email Address">
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+              <input type="password" name="password" id="password-field" 
+              class="form-control input-sm" placeholder="Password">
+            </div>
+          </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <div class="form-group">
+                <input type="password" name="password_confirmation" 
+                id="password-confirmation" class="form-control input-sm" 
+                placeholder="Confirm Password">
+              </div>
+            </div>
+          </div>          
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-block" 
+            id="submit-register">Register</button>
+          </div>   
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Shelter Modal -->
+<div class="modal fade four" tabindex="-1" role="dialog" id="shelter-modal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">Search For A Shelter</h4>
+      </div>
+        <div class="modal-body four">
+          <form action="/shelters-search" method="GET">
+            <input type="text" name="zipcode" maxlength="5" id="zipcode-field" placeholder="94114">
+        </div>
+          <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="search-shelters">Search</button>
+          </form>
+          </div>
+    </div>/<!-- .modal-content -->
+  </div>/<!-- .modal-dialog -->
+</div><!--.modal  -->
+
+{% block content %}
+    Put your body here.
+{% endblock %}
+
+
+</body>
+</html>
