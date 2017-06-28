@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session, jsonify
+from flask import Flask, render_template, request, Response, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Animal, Shelter, UserAnimal, UserSearch
@@ -11,6 +11,8 @@ import os, sys
 import petfinder
 from sqlalchemy import exc # this handles Integrity Errors
 import json
+
+from twilio.twiml.messaging_response import MessagingResponse
 
 # Google Maps api key
 maps_api_key = os.environ["GOOGLEMAPS_API_KEY"]
@@ -447,13 +449,29 @@ def get_liked_pets():
 
     return jsonify(results) 
 
+@app.route("/alert-from-shelter", methods=["POST"])
+def alert_from_shelter():
+    """Get alerts from shelter when status of liked pet changes"""
+    response = twiml.Response()
+    # we get the SMS message from the request. we could also get the 
+    # "To" and the "From" phone number as well
+    inbound_message = request.form.get("Body")
+    # we can now use the incoming message text in our Python application
+    if inbound_message == "Hello":
+        response.message("Hello back to you!")
+    else:
+        response.message("Hi! Not quite sure what you meant, but okay.")
+    # we return back the mimetype because Twilio needs an XML response
+    return Response(str(response), mimetype="application/xml"), 200
+
+
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
 
     # Do not debug for demo
-    app.debug = False
+    app.debug = True
     app.jinja_env.auto_reload = app.debug
 
     connect_to_db(app)
