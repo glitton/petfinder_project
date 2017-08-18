@@ -11,6 +11,7 @@ import os, sys
 import petfinder
 from sqlalchemy import exc # this handles Integrity Errors
 import json
+<<<<<<< HEAD
 # Twilio API
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse, Message
@@ -21,6 +22,10 @@ twilio_api_secret = os.environ["TWILIO_API_SECRET"]
 
 #Create TWILIO client object
 client = Client(twilio_api_key, twilio_api_secret)
+=======
+# Twilio SMS
+from twilio.twiml.messaging_response import MessagingResponse
+>>>>>>> d20dcfa3ea4b6e45c39dc30be081bb38aa0d8389
 
 # Google Maps api key
 maps_api_key = os.environ["GOOGLEMAPS_API_KEY"]
@@ -65,11 +70,11 @@ def index():
                            cat_breeds=cat_breeds)
 
 
-@app.route("/register", methods=['GET'])
-def register_form():
-    """Show form for user signup."""
+# @app.route("/register", methods=['GET'])
+# def register_form():
+#     """Show form for user signup."""
 
-    return render_template("register-form2.html")
+#     return render_template("register-form2.html")
 
 
 @app.route("/process-registration", methods=['POST']) 
@@ -80,19 +85,11 @@ def register_process():
     first_name = request.form.get("firstname")
     last_name = request.form.get("lastname")
     email = request.form.get("email") 
-    password = request.form.get("password")    
-    address1 = request.form.get("address1")    
-    address2 = request.form.get("address2")      
-    city = request.form.get("city")
-    state = request.form.get("state")    
-    zipcode = request.form.get("zipcode")    
+    password = request.form.get("password")       
     phone = request.form.get("phone")
     
     new_user = User(first_name=first_name, last_name=last_name,
-                    email=email, password=password, 
-                    address1=address1, address2=address2,
-                    city=city, state=state,
-                    zipcode=zipcode, phone=phone)
+                    email=email, password=password, phone=phone)
     
     # handles registration duplicate, flashes message
     try:     
@@ -229,9 +226,9 @@ def process_complete_search():
     else:
         location = zipcode       
 
-    liked = db.session.query(UserAnimal.animal_id).filter(UserAnimal.user_id == session['user_id']).subquery()
-    liked_petid = db.session.query(Animal.pet_id).filter(Animal.animal_id.in_(liked)).all()
-    liked_petid = [str(liked_pet[0]) for liked_pet in liked_petid]
+    # liked = db.session.query(UserAnimal.animal_id).filter(UserAnimal.user_id == session['user_id']).subquery()
+    # liked_petid = db.session.query(Animal.pet_id).filter(Animal.animal_id.in_(liked)).all()
+    # liked_petid = [str(liked_pet[0]) for liked_pet in liked_petid]
 
     pets = api.pet_find(location=location,
                         animal=animal, 
@@ -265,7 +262,6 @@ def process_complete_search():
                             gender=gender, # user form input
                             breed=breed,
                             pets=pet_list,
-                            liked_petid=liked_petid,
                             search_info=search_info)    
 
 

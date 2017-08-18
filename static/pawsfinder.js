@@ -1,11 +1,10 @@
 "use strict"
 
-
 $(document).ready(function(){
 
-  if ($("#logout-button").prop("hidden") === false ) {
-      $("#when-loggedin").show();
-  }
+  // if ($("#logout-button").prop("hidden") === false ) {
+  //     $("#when-loggedin").show();
+  // }
 
 //Execute login
 //event listener
@@ -101,5 +100,7 @@ $("#logout-link").click(doLogout);
   $("#register-link").on("click", function(){
     $("#register-modal").modal("show");
   }); 
+
+  
 
  });//end of document ready function
