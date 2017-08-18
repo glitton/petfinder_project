@@ -73,18 +73,10 @@ def register_process():
     last_name = request.form.get("lastname")
     email = request.form.get("email") 
     password = request.form.get("password")    
-    address1 = request.form.get("address1")    
-    address2 = request.form.get("address2")      
-    city = request.form.get("city")
-    state = request.form.get("state")    
-    zipcode = request.form.get("zipcode")    
     phone = request.form.get("phone")
     
     new_user = User(first_name=first_name, last_name=last_name,
-                    email=email, password=password, 
-                    address1=address1, address2=address2,
-                    city=city, state=state,
-                    zipcode=zipcode, phone=phone)
+                    email=email, password=password,phone=phone)
     
     # handles registration duplicate, flashes message
     try:     
