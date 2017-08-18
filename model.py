@@ -1,4 +1,4 @@
-"""Models and database functions for PAWS Finder project."""
+"""Models and database functions for BFF Finder project."""
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc # added this to handle IntegrityError 
@@ -25,8 +25,17 @@ class User(db.Model):
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(30), nullable=False, unique=True) # this is the username
-    password = db.Column(db.String(200), nullable=False) #add hash to this
+    password = db.Column(db.String(30), nullable=False)
+    address1 = db.Column(db.String(64), nullable=True)
+    address2 = db.Column(db.String(64), nullable=True)        
+    city = db.Column(db.String(15), nullable=True)
+    state = db.Column(db.String(10), nullable=True)   
+    zipcode = db.Column(db.String(10), nullable=True)
     phone = db.Column(db.String(15), nullable=True)
+
+    liked_animals = db.relationship("Animal", 
+                                    secondary="usersanimals", 
+                                    backref="users")
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -55,13 +64,29 @@ class Animal(db.Model):
     last_update = db.Column(db.DateTime, nullable=True)
 
     shelter = db.relationship("Shelter",
-                           backref=db.backref("animals"))
+                              backref=db.backref("animals"))
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
         s = "<Animal animal_id=%s name=%s breed=%s age=%s gender=%s>" 
         return s % (self.animal_id, self.name, self.breed, self.age, self.gender)
+
+    def to_dict(self):
+        """Returns a dictionary representing the object"""
+
+        
+        # another way to do this but more complex               
+        dict_of_obj = {}       
+        # iterate through the table's columns, adding the value in each
+        # to the dictionary
+        for column_name in self.__mapper__.column_attrs.keys():
+            value = getattr(self, column_name, None)
+            dict_of_obj[column_name] = value
+
+
+        #return the completed dictionary
+        return dict_of_obj
 
 
 class Shelter(db.Model):
@@ -91,15 +116,19 @@ class Shelter(db.Model):
         return s % (self.name, self.email, self.city, self.state, self.shelter_id)
 
 class UserAnimal(db.Model):
-    """Association table that links users to animals."""
+    """Association table that links users to animals"""
 
     __tablename__ = "usersanimals"
 
     user_animal_id = db.Column(db.Integer,
                           autoincrement=True,
                           primary_key=True)
-    animal_id = db.Column(db.Integer, db.ForeignKey('animals.animal_id'),nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    animal_id = db.Column(db.Integer, 
+                          db.ForeignKey('animals.animal_id'),
+                          nullable=False)
+    user_id = db.Column(db.Integer, 
+                        db.ForeignKey('users.user_id'), 
+                        nullable=False)
 
     # Define relationship to user
     user = db.relationship("User",
@@ -172,33 +201,33 @@ class UserSearch(db.Model):
         return dict_of_obj
 
 # Testing DB section
-# def connect_to_db(app, db_uri="postgresql:///pawsfinder"):
-#     app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
-#     db.app = app
-#     db.init_app(app)
-
-
-# def example_data():
-#     """Create example data for the test database."""
-
-#     user1 = User(first_name="Generosa", last_name="Litton",email="glitton@gmail.com", password="uRGr34t")
-#     user2 = User(first_name="Django", last_name="Litton",email="django@gmail.com", password="theBee!",
-#                 address1="136 North Drive", city="San Francisco", state="CA", zipcode="94132")
-
-
-#     db.session.add_all([user1, user2])
-#     db.session.commit()        
-        
-#####################################################################
-# Helper functions #comment out when testing
-
-def connect_to_db(app):
-    """Connect the database to our Flask app."""
-
-    # Configure to use our PostgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///paws'
+def connect_to_db(app, db_uri="postgresql:///pawsfinder"):
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     db.app = app
     db.init_app(app)
+
+
+def example_data():
+    """Create example data for the test database."""
+
+    user1 = User(first_name="Generosa", last_name="Litton",email="glitton@gmail.com", password="uRGr34t")
+    user2 = User(first_name="Django", last_name="Litton",email="django@gmail.com", password="theBee!",
+                address1="136 North Drive", city="San Francisco", state="CA", zipcode="94132")
+
+
+    db.session.add_all([user1, user2])
+    db.session.commit()        
+        
+#####################################################################
+# Helper functions #used before I did the testing
+
+# def connect_to_db(app):
+#     """Connect the database to our Flask app."""
+
+#     # Configure to use our PostgreSQL database
+#     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///furfinder'
+#     db.app = app
+#     db.init_app(app)
 
 
 if __name__ == "__main__":

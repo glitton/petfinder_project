@@ -29,7 +29,7 @@
 </head>
 <body>
 
-<!-- Navbar  -->
+<!-- Bootstrap navbar set up -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -47,12 +47,7 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <!-- Register link, modal in line 129 -->
-      <li>
-        <a href="#" id="register-link">
-        <span class="glyphicon glyphicon-user"></span>Register
-        </a>
-      </li>
+      <li><a href="#" id="register-link"><span class="glyphicon glyphicon-user"></span>Register</a></li>
       
       {% if 'user_id' not in session %}
         <li id="login-button"><a href="#" id="login-link"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
@@ -140,15 +135,12 @@
         <form action="/process-registration" method="POST">
           <div class="row">
             <p id="registration-status"></p>
-            
-            <!-- First Name Field -->
-            <div class="col-xs-6 col-sm-6 col-md-6">
-              <div class="form-group">
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
                 <input type="text" name="firstname" id="firstname-field" 
                 class="form-control input-sm" placeholder="First Name">
+                </div>
               </div>
-            </div>
-            <!-- Last Name Field -->
             <div class="col-xs-6 col-sm-6 col-md-6">
               <div class="form-group">
                 <input type="text" name="lastname" id="lastname-field" 
@@ -157,32 +149,18 @@
             </div>
           </div>
 
-          <div class="row">
-            <!-- Email Field -->
-            <div class="col-xs-6 col-sm-6 col-md-6">
-              <div class="form-group">
-                <input type="email" name="email" id="email-field" 
-                class="form-control input-sm" placeholder="Email Address">
-              </div>  
-            </div>  
-            <!-- Phone field -->
-            <div class="col-xs-6 col-sm-6 col-md-6">
-              <div class="form-group">
-                <input type="tel" name="phone" id="phone-field" 
-                class="form-control input-sm" placeholder="Phone format +14155551212">
-              </div>  
-            </div>              
-          </div>  
+        <div class="form-group">
+            <input type="email" name="email" id="email-field" 
+            class="form-control input-sm" placeholder="Email Address">
+        </div>
 
-          <div class="row">
-            <!-- Password -->
-            <div class="col-xs-6 col-sm-6 col-md-6">
-              <div class="form-group">
-                <input type="password" name="password" id="password-field" 
-                class="form-control input-sm" placeholder="Password">
-              </div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+              <input type="password" name="password" id="password-field" 
+              class="form-control input-sm" placeholder="Password">
             </div>
-            <!-- Confirm password -->
+          </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
               <div class="form-group">
                 <input type="password" name="password_confirmation" 
@@ -190,9 +168,7 @@
                 placeholder="Confirm Password">
               </div>
             </div>
-          </div> 
-          
-          <!-- Register button          -->
+          </div>          
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary btn-block" 
             id="submit-register">Register</button>

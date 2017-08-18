@@ -18,7 +18,13 @@
   <h3>Find Your Next Pet</h3>
   <span>
     <div class="form-group">
-      <form class="form-inline" action="/search-complete" method="GET">
+      <form class="form-inline"
+        {% if "user_id" in session %}
+          action="/search-complete"
+        {% else %} 
+          action="/search"
+        {% endif %}
+          method="GET">
         <label for="inlineFormZipcode">Zip code</label>  
           <input type="text" name="zipcode" placeholder="94114" maxlength="5" size="6" required>
         <label for="inlineFormCity">City</label> 
@@ -30,25 +36,31 @@
             {% for animal in animals %}
               <option value="{{ animal }}">{{ animal }}</option>
             {% endfor %}  
-          </select> 
+          </select>
+          
         <label for="inlineFormGender">Gender</label>
           <select name="gender">
           {% for kgender, vgender in genders.items() %}
             <option value="{{ kgender }}">{{ vgender }}</option>
           {% endfor %}  
-          </select> 
+          </select>
+  </span> 
+      {% if 'user_id' in session %}   
+      <span id="when-loggedin" hidden>  
         <label for="inlineFormSize">Size</label>
           <select name="size">
            {% for key, value in sizes.items() %}
             <option value="{{ key }}">{{ value }}</option>
            {% endfor %}     
           </select> 
+
         <label for="inlineFormAge">Age</label>
         <select name="age">
          {% for age in ages %}
           <option value="{{ age }}">{{ age.lower() }}</option>
          {% endfor %}     
         </select> 
+
         <label for="inlineFormBreed">Breed</label>
         <select class="breeds" name="dog-breeds" id="dogs">
           {% for vdog in dog_breeds["dogs"] %}
@@ -61,6 +73,7 @@
           {% endfor %}
         </select>              
       </span>
+      {% endif %}
       <br>
       <br>
       <button type="submit" class="btn btn-primary">Search</button>
@@ -68,14 +81,14 @@
   </div> 
 </header>
 
-<!-- Carousel -->
+<!-- Page Features -->
 <div class="row text-center">
 
 <div class="container">
  <br>
   <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
 
-    <!-- Wrapper for carousel -->
+    <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
 
       <div class="item active">
@@ -105,7 +118,7 @@
 
     </div>
 
-    <!-- Carousel left and right controls -->
+    <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>

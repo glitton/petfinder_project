@@ -1,12 +1,11 @@
 """Paws Finder. Uses Flask, Jinja, AJAX and JSON
 
 Working on SMS alert capability via Twilio API
-MASTER FILE - Aug. 18, 2017
 """
 from flask import Flask, Response, request
 from flask_debugtoolbar import DebugToolbarExtension
 from twilio.rest import Client
-from twilio.twiml.messaging_response import MessagingResponse, Message
+from twilio.twiml.messaging_response import MessagingResponse
 import os
 
 # Twilio API credentials
@@ -39,20 +38,17 @@ def send_alert():
 @app.route("/sms", methods=["POST"])
 def respond_to_shelter_alert():
     """User response to alert from shelter"""
+    
+    response = MessagingResponse()
 
     # Based on users response, message is returned
-    inbound_message = request.values.get("Body", None)
+    inbound_message = request.form.get("Body")
 
     # Respond to the user 
     if inbound_message == "Yes":
-        message = "Contact us for an appointment."
-    elif inbound_message == "No":
-        message = "Have a great day!"
-    else:    
-        message = "Check PAWS Finder for updates."
-
-    response = MessagingResponse()
-    response.message(message)    
+        response.message("Contact us for an appointment.")
+    else:
+        response.message("Check PAWS Finder for updates.")
 
     return str(response)
 
