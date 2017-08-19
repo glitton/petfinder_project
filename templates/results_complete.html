@@ -5,11 +5,11 @@
 
 <div class="container">
     <h2>Your Search: {{ sizes[size].capitalize() }} {{ genders[gender] }} {{ breed.lower() }} {{ animal }} in location {{ location }}.</h2>
-    <span id="save-status"> Check to save this search
-    <input id="save-box" type="checkbox" name="searches" value="Yes"/>
-  </span>
-  <br>  
-  <p>Like a pet? Click the blue heart.</p> 
+    
+      <h3 id="save-status"> Check to save this search
+        <input id="save-box" type="checkbox" name="searches" value="Yes"/>
+      </h3>
+      <h3>Like a pet? Click the blue heart.</h3>
   <br>
 
   <div id="save-search-form">
@@ -17,10 +17,10 @@
         <label>
              Title <input id="saved-title" type="text" name="title" required>
         </label>
-        <label>
+        <label class='save-description'>
             Description <input id="saved-description" type="text" name="description">
         </label>
-      <input id="save-search-button" type="submit" value="Save"> 
+      <input class='btn btn-primary btn-sm save-search-btn' id="save-search-button" type="submit" value="Save"> 
       </form>
     </p>
   </div>
@@ -89,14 +89,16 @@
 
 <!-- <!- Revisit and fix -->
 <script type="text/javascript"> 
-  function learnMore(number) {
-  $("#learn-more"+"-"+number).on("click", function(){
-    $("#learn-more-modal"+"-"+number).modal("show");
-  });
-}
  {% for pet in pets %}
   learnMore({{ pet.id }})
  {% endfor %}
+
+//   function learnMore(number) {
+//   $("#learn-more"+"-"+number).on("click", function(){
+//     $("#learn-more-modal"+"-"+number).modal("show");
+//   });
+// }
+
 </script>
 
 

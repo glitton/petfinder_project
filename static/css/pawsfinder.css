@@ -58,6 +58,12 @@ header.jumbotron.hero-spacer {
   width: 200px;
 }
 
+/*Save modal*/
+
+p.save-modal {
+  margin: 5px 60px 10px;
+  font-size: 14px;
+}
 
 /* style for modals */
 #login-modal, #shelter-modal {
@@ -141,8 +147,18 @@ footer {
     width: 150px;   
 }
 
+/*Save search form*/
+.save-description {
+  margin-left: 25px;
+}
+
+.save-search-btn {
+  margin-left: 10px;
+}
+
 label {
-    font-weight: normal !important;
+  font-weight: normal !important;
+  margin-bottom: 16px;
 
 } 
 
@@ -163,6 +179,7 @@ label {
 #img-height {
   height: 400px;
   overflow: hidden;
+  margin-bottom: 50px;  
 }
 
 /* Animation for liked hearts */

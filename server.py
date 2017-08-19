@@ -56,9 +56,13 @@ def index():
     ages = ["Baby", "Young", "Adult", "Senior"]
     sizes = {'S': 'small', 'M': 'medium', 'L': 'large', 'XL': 'xlarge'}
     genders = {"F": "female", "M": "male"}
-    dog_breeds = {"dogs": ["None", "Australian Cattledog", "Beagle", "Border Collie", 
-                  "Boxer", "Bulldog", "Chihuahua", "Dachshund", "German Shepherd","Labrador Retriever", 
-                  "Mixed Breed", "Pit Bull Terrier", "Staffordshire Terrier", "Yorkshire Terrier"]}
+    dog_breeds = {"dogs": ["None", "Australian Cattledog", "Australian Shepherd", 
+                  "Basset Hound", "Beagle", "Border Collie", "Boston Terrier",
+                  "Boxer", "Bulldog", "Catahoula Leopard Dog", "Cattle Dog", 
+                  "Chihuahua", "Cocker Spaniel", "Dachshund", "Dalmatian", "English Bulldog",
+                  "French Bulldog", "German Shepherd", "Great Dane", "Great Pyrenees", "Greyhound",
+                  "Labrador Retriever", "Mixed Breed", 
+                  "Pit Bull Terrier", "Pug", "Staffordshire Terrier", "Yorkshire Terrier"]}
     cat_breeds = {"cats": ["None", "American Shorthair", "Calico", "Domestic Long Hair", 
                  "Domestic Medium Hair", "Domestic Short Hair", "Siamese", "Tabby", 
                  "Tabby-Brown", "Tabby-Gray","Tabby-Orange", "Tortoiseshell", "Tuxedo"]}           
@@ -262,6 +266,8 @@ def process_complete_search():
             break    
 
 
+    print pet_list[2]
+
     return render_template("results_complete.html",
                             location=location,
                             animal=animal, 
@@ -385,13 +391,16 @@ def show_shelter_pets():
                                        output="full",
                                        count=30)
 
+
+
     shelterpet_list = []
+
     # loop through a range from the api call
     # append to list
     for i in range(10):
         shelter_pet = shelter_pets.next()
-        shelterpet_list.append(shelter_pet)  
-          
+        shelterpet_list.append(shelter_pet)   
+       
     return render_template("shelter_pets.html",
                             shelterpets=shelterpet_list)                             
 
