@@ -12,7 +12,16 @@ import petfinder
 from sqlalchemy import exc # this handles Integrity Errors
 import json
 
-from twilio.twiml.messaging_response import MessagingResponse
+# Twilio SMS API
+from twilio.rest import Client
+from twilio.twiml.messaging_response import MessagingResponse, Message
+
+# Twilio API credentials
+twilio_api_key = os.environ["TWILIO_API_KEY"]
+twilio_api_secret = os.environ["TWILIO_API_SECRET"]
+
+#Create TWILIO client object
+client = Client(twilio_api_key, twilio_api_secret)
 
 # Google Maps api key
 maps_api_key = os.environ["GOOGLEMAPS_API_KEY"]
@@ -441,20 +450,41 @@ def get_liked_pets():
 
     return jsonify(results) 
 
-@app.route("/alert-from-shelter", methods=["POST"])
-def alert_from_shelter():
-    """Get alerts from shelter when status of liked pet changes"""
-    response = twiml.Response()
-    # we get the SMS message from the request. we could also get the 
-    # "To" and the "From" phone number as well
-    inbound_message = request.form.get("Body")
-    # we can now use the incoming message text in our Python application
-    if inbound_message == "Hello":
-        response.message("Hello back to you!")
-    else:
-        response.message("Hi! Not quite sure what you meant, but okay.")
-    # we return back the mimetype because Twilio needs an XML response
-    return Response(str(response), mimetype="application/xml"), 200
+
+@app.route("/send-alert", methods=["GET"])
+def send_alert():
+    """Shelter sends SMS updates about saved pets"""
+
+    #Create alert message
+    message = client.messages.create(
+         to = os.environ["MY_PHONE"],
+         from_ = os.environ["TWILIO_PHONE"],
+         body = "There are updates to your saved pets! \
+         Type 'Yes' if interested.",
+         media_url = ["http://bit.ly/2tlWPcH"])
+
+    return Response("Shelter alert sent!"), 200
+
+
+@app.route("/sms", methods=["POST"])
+def respond_to_shelter_alert():
+    """User response to alert from shelter"""
+
+    # Based on users response, message is returned
+    inbound_message = request.values.get("Body", None)
+
+    # Respond to the user 
+    if inbound_message == "Yes":
+        message = "Contact us for an appointment."
+    elif inbound_message == "No":
+        message = "Have a great day!"
+    else:    
+        message = "Check PAWS Finder for updates."
+
+    response = MessagingResponse()
+    response.message(message)    
+
+    return str(response)
 
 
 
