@@ -8,16 +8,6 @@
   
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
-  <!-- Bootstrap and Google js -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  <!-- my javascript -->
-  <script src="static/pawsfinder.js"></script> 
-  <script src="static/savedpaws.js"></script> 
-  <script src="static/shelters.js"></script> 
-  <script src="static/zipcode.js"></script>
 
   <!-- Google Fonts -->
  <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Open+Sans" rel="stylesheet">
@@ -152,44 +142,44 @@
             </div>
           </div>
 
-        <div class="row">
-          <!-- Email Field -->
-          <div class="col-xs-6 col-sm-6 col-md-6">
-            <div class="form-group">
-              <input type="email" name="email" id="email-field" 
-              class="form-control input-sm" placeholder="Email Address">
-            </div>
-          </div> 
-          <!-- Phone Field -->
-          <div class="col-xs-6 col-sm-6 col-md-6">
-            <div class="form-group">
-              <input type="tel" name="phone" id="phone-field" 
-              class="form-control input-sm" placeholder="Phone +14157771212">
-            </div>
-          </div>            
-        </div>
-      
-        <div class="row">
-          <!-- Password field -->
-          <div class="col-xs-6 col-sm-6 col-md-6">
-            <div class="form-group">
-              <input type="password" name="password" id="password-field" 
-              class="form-control input-sm" placeholder="Password">
-            </div>
-          </div>
+          <div class="row">
+            <!-- Email Field -->
             <div class="col-xs-6 col-sm-6 col-md-6">
               <div class="form-group">
-                <input type="password" name="password_confirmation" 
-                id="password-confirmation" class="form-control input-sm" 
-                placeholder="Confirm Password">
+                <input type="email" name="email" id="email-field" 
+                class="form-control input-sm" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Invalid input. Email must contain a domain in the form of @domain.com." placeholder="Email Address">
               </div>
+            </div> 
+            <!-- Phone Field -->
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <div class="form-group">
+                <input type="tel" name="phone" id="phone-field" 
+                class="form-control input-sm" placeholder="Phone +14157771212">
+              </div>
+            </div>            
+          </div>
+        
+          <div class="row">
+            <!-- Password field -->
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <div class="form-group">
+                <input type="password" name="password" id="password-field" 
+                class="form-control input-sm" pattern=".{6,}" title="Six or more characters" placeholder="Password requires 6 or more characters" title="Invalid input, password must contain 6 or more characters.">
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <div class="form-group">
+                <input type="password" name="password_confirmation" class="form-control input-sm" id="confirm-password" name="password2" pattern=".{6,}" title="Six or more characters" placeholder="Confirm password" title="Invalid input, passwords didn't match.">
+              </div>
+              <div class="password-message" id="confirmMessage"></div>
             </div>
           </div>   
                  
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary btn-block" 
-            id="submit-register">Register</button>
-          </div>   
+            <button type="reset" class="btn btn-default" id='cancel-signup'>Cancel</button>
+            <button type="submit" class="btn btn-primary" id='submit-register'>Submit</button>
+          </div>
+
         </form>
       </div>
     </div>
@@ -220,6 +210,16 @@
     Put your body here.
 {% endblock %}
 
+  <!-- Bootstrap and Google js -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- my javascript -->
+  <script src="static/register.js"></script> 
+  <script src="static/pawsfinder.js"></script> 
+  <script src="static/savedpaws.js"></script> 
+  <script src="static/shelters.js"></script> 
+  <script src="static/zipcode.js"></script>
 
 </body>
 </html>

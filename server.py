@@ -23,6 +23,11 @@ twilio_api_secret = os.environ["TWILIO_API_SECRET"]
 #Create TWILIO client object
 client = Client(twilio_api_key, twilio_api_secret)
 
+#add password hash using sha256_crypt
+#Based on this tut
+#https://pythonprogramming.net/password-hashing-flask-tutorial/?completed=/flask-user-register-tutorial/
+from passlib.hash import sha256_crypt
+
 # Google Maps api key
 maps_api_key = os.environ["GOOGLEMAPS_API_KEY"]
 
@@ -83,9 +88,13 @@ def register_process():
     email = request.form.get("email") 
     password = request.form.get("password")    
     phone = request.form.get("phone")
+
+    #hash the password and store this in DB
+    password_hash = sha256_crypt.encrypt(password)
     
     new_user = User(first_name=first_name, last_name=last_name,
-                    email=email, password=password,phone=phone)
+                    email=email, password=password_hash,
+                    phone=phone)
     
     # handles registration duplicate, flashes message
     try:     

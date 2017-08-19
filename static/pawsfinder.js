@@ -96,10 +96,5 @@ $("#logout-link").click(doLogout);
       }
   });   
 
-//Show registration modal
-//event listener 
-  $("#register-link").on("click", function(){
-    $("#register-modal").modal("show");
-  }); 
 
  });//end of document ready function
