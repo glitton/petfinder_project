@@ -18,6 +18,30 @@
   background-color: #373F51 !important;
 }
 
+/*Registration modal*/
+.password-message {
+  position: absolute;
+  left: -7px;
+  bottom: 20px;
+}
+
+.modal-reg,
+.modal-save-likes {
+  position: relative;
+  top: 22px;
+}
+
+.modal-footer {
+  text-align: center;
+}
+
+/*Login modal*/
+
+.login {
+  width: 200px;
+}
+
+
 /* style for modals */
 #login-modal, #shelter-modal {
   text-align: center;
@@ -88,8 +112,10 @@ footer {
 }
 
 .flash-center {
-    text-align: center;
-    font-weight: bold;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 24px;
 }
 
 .breeds {

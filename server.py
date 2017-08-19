@@ -24,8 +24,7 @@ twilio_api_secret = os.environ["TWILIO_API_SECRET"]
 client = Client(twilio_api_key, twilio_api_secret)
 
 #add password hash using sha256_crypt
-#Based on this tut
-#https://pythonprogramming.net/password-hashing-flask-tutorial/?completed=/flask-user-register-tutorial/
+#Used Christine Urban's Outerspaces as a guide
 from passlib.hash import sha256_crypt
 
 # Google Maps api key
@@ -100,8 +99,8 @@ def register_process():
     try:     
         db.session.add(new_user)
         db.session.commit()
-        flash("Welcome %s %s!  You are registered. \
-              Your username is your email address, %s." 
+        flash("Welcome %s %s! \
+              Your username is %s." 
               % (first_name, last_name, email))
     except exc.IntegrityError:
         flash("User already exists. Please login")
@@ -119,12 +118,18 @@ def perform_login():
     password = request.form.get("password")
     user = User.query.filter_by(email=email).first()  
 
+    #output of password_to_verify is True/False.  Check user input vs. database
+    password_to_verify = sha256_crypt.verify(password, user.password)
+
+    # print user.password
+    # print password_to_verify
+
     if not user:
         results = {"success": False,
         "message": "No user exists, please register."}
         return jsonify(results)  
            
-    if user.password != password:
+    if not password_to_verify: 
         results = {"success": False,
         "message": "Invalid username/password, try again."}
         return jsonify(results) 

@@ -33,7 +33,8 @@ $("#loginmodal-submit").click(doLogin);
             
             if (success === true) {
                 //hide login modal
-                $("#login-modal").modal("hide");
+                // $("#login-modal").modal("hide");
+                
                 //change message to show logged in status
                 //change home page to show saved paws and search shelters
                 
@@ -44,7 +45,7 @@ $("#loginmodal-submit").click(doLogin);
                 $("#logout-message").hide(); 
                 $("#saved-paws-link").show();
                 $("#search-shelters-link").show(); 
-                // window.location.reload();
+                window.location.reload();
                 $("#welcome-message").text("Welcome, " + results.firstname + "!");
                 $("#welcome-message").show();  
             }

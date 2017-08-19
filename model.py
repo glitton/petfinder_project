@@ -26,8 +26,8 @@ class User(db.Model):
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(30), nullable=False, unique=True) # this is the username
-    password = db.Column(db.String(30), nullable=False)
-    phone = db.Column(db.String(15), nullable=True)
+    password = db.Column(db.String(500), nullable=False)
+    phone = db.Column(db.String(15), nullable=False)
 
     liked_animals = db.relationship("Animal", 
                                     secondary="usersanimals", 

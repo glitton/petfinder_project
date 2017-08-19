@@ -63,7 +63,7 @@
   <div class="modal-dialog"  role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title">Saved Searches And Likes</h3><br>
+        <h2 class="modal-title modal-save-likes">Saved Searches And Likes</h3><br>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -84,28 +84,26 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
-        <h3 class="modal-title">Log In</h3>
+        <h3 class="modal-title modal-login">Log In</h3>
       </div>
         <div class="modal-body two">
         <p id="login-error-message" hidden></p>
           <form id="login-form">
             <div class="form-group">
-              <input type="text" id="login-email-field" name="email" placeholder="Email"><br>
+              <input type="text" class='login' id="login-email-field" name="email" placeholder="Email"><br>
             </div>
             <div class="form-group">  
-              <input type="password" id="login-password-field" name="password" placeholder="Password"><br>  
+              <input type="password" class='login' id="login-password-field" name="password" placeholder="Password"><br>  
             </div>        
-            <div class="form-group">
-              <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                <button type="submit" class="form-control btn btn-login btn-primary" id="loginmodal-submit">Login</button>
-                </div>
-              </div>
-            </div>    
+              <div class="modal-footer">
+                <button type="reset" class="btn btn-default" id='loginmodal-cancel'>Cancel</button>
+                <button type="submit" class="btn btn-primary btn-login" id='loginmodal-submit'>Login</button>
+              </div>                 
           </form>  
-          <div class="login-help">
+          <!-- Add this later -->
+<!--           <div class="login-help">
             <a href="#">Register</a> - <a href="#">Forgot Password</a>
-          </div>
+          </div> -->
         </div>
     </div>/<!-- .modal-content -->
   </div>/<!-- .modal-dialog -->
@@ -116,7 +114,7 @@
   <div class="modal-dialog"  role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title">Sign Up For A Free Account</h2><br>
+        <h2 class="modal-title modal-reg">Sign Up For A Free Account</h2><br>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -154,7 +152,8 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
               <div class="form-group">
                 <input type="tel" name="phone" id="phone-field" 
-                class="form-control input-sm" placeholder="Phone +14157771212">
+                class="form-control input-sm"
+                pattern="\+\d{1}\d{3}\d{3}\d{4}" placeholder="Mobile phone  +14158881212" title="Invalid input, please use the format +14158881212">
               </div>
             </div>            
           </div>
@@ -171,13 +170,13 @@
               <div class="form-group">
                 <input type="password" name="password_confirmation" class="form-control input-sm" id="confirm-password" name="password2" pattern=".{6,}" title="Six or more characters" placeholder="Confirm password" title="Invalid input, passwords didn't match.">
               </div>
-              <div class="password-message" id="confirmMessage"></div>
+              <div class="password-message" id="confirm-message"></div>
             </div>
           </div>   
                  
           <div class="modal-footer">
             <button type="reset" class="btn btn-default" id='cancel-signup'>Cancel</button>
-            <button type="submit" class="btn btn-primary" id='submit-register'>Submit</button>
+            <button type="submit" class="btn btn-primary" id='signup-btn'>Submit</button>
           </div>
 
         </form>
@@ -192,7 +191,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title">Search For A Shelter</h4>
+        <h3 class="modal-title modal-shelter">Search For A Shelter</h4>
       </div>
         <div class="modal-body four">
           <form action="/shelters-search" method="GET">
