@@ -5,6 +5,17 @@
  */
 /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 
+header.jumbotron.hero-spacer {
+  margin-top: 2px;
+  margin-bottom: 0px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.jumbotron p {
+  margin-top: -15px;
+  margin-bottom: 5px;
+}
 
 /* navbar */
 .navbar-inverse {
@@ -16,6 +27,12 @@
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
   background-color: #373F51 !important;
+}
+
+/*Search area on home page*/
+.main-search {
+  margin-top: -10px;
+  margin-left: -10px;
 }
 
 /*Registration modal*/
@@ -103,8 +120,10 @@ footer {
 }
 /*Carousel image sizes*/
 .item img {
-  width: 760px !important;
-  height: 500px !important;
+  /*width: 760px !important;
+  height: 500px !important;*/
+  width: 660px !important;
+  height: 400px !important;
 }
 /*Hide form in home page for users not logged in*/
 .hidden { 

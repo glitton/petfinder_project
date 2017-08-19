@@ -69,12 +69,12 @@ def index():
                            dog_breeds=dog_breeds,
                            cat_breeds=cat_breeds)
 
+#using a modal so don't need this route
+# @app.route("/register", methods=['GET'])
+# def register_form():
+#     """Show form for user signup."""
 
-@app.route("/register", methods=['GET'])
-def register_form():
-    """Show form for user signup."""
-
-    return render_template("register-form2.html")
+#     return render_template("register-form2.html")
 
 
 @app.route("/process-registration", methods=['POST']) 
@@ -468,6 +468,8 @@ def get_liked_pets():
 @app.route("/send-alert", methods=["GET"])
 def send_alert():
     """Shelter sends SMS updates about saved pets"""
+
+    # TO DO:  Insert user phone in the to area
 
     #Create alert message
     message = client.messages.create(
