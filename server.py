@@ -266,7 +266,7 @@ def process_complete_search():
             break    
 
 
-    print pet_list[2]
+    # print pet_list[2]
 
     return render_template("results_complete.html",
                             location=location,
