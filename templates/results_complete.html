@@ -87,14 +87,14 @@
     </div>  
 </div>
 
-  <!-- jQuery -->
-  <script
-  src="https://code.jquery.com/jquery-3.2.1.js"
-  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-  crossorigin="anonymous"></script>
+<!-- jQuery -->
+<script
+ src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous">
+</script>
 
 <!-- <!- Revisit and fix -->
 <script type="text/javascript"> 
+// Loop through pet API, get pet id and invoke function learnMore
  {% for pet in pets %}
   learnMore({{ pet.id }})
  {% endfor %}

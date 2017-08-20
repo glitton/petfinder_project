@@ -13,6 +13,8 @@ from sqlalchemy import exc # this handles Integrity Errors
 import json
 
 # Twilio SMS API
+from twilio import twiml #this is for route /receive-sms
+#This is for the send-alert route
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse, Message
 
@@ -24,7 +26,6 @@ twilio_api_secret = os.environ["TWILIO_API_SECRET"]
 client = Client(twilio_api_key, twilio_api_secret)
 
 #add password hash using sha256_crypt
-#Used Christine Urban's Outerspaces as a guide
 from passlib.hash import sha256_crypt
 
 # Google Maps api key
@@ -230,8 +231,6 @@ def process_complete_search():
                    
     session["last_search"] = search_info 
 
-
-
     # assign location to either zipcode or city, state
     if not zipcode:
         location = city + " " + state 
@@ -371,6 +370,8 @@ def process_search_shelters():
     for i in range(30):
         shelter = shelters.next()
         shelter_list.append(shelter)  
+
+    print shelter_list[2]    
         
    
     return render_template("shelters_search.html",
@@ -385,13 +386,17 @@ def show_shelter_pets():
 
     # Get shelterID from googlemap infowindow
     shelter_id = request.args.get("id")
+    print shelter_id
+
+    # Get shelter name from googlemap infowindow
+    # Display name in shelter_pets.html
+    shelter_name = request.args.get("name")
+    print shelter_name
 
     # Call api and process search, note variables are singular.
     shelter_pets = api.shelter_getpets(id=shelter_id,
                                        output="full",
                                        count=30)
-
-
 
     shelterpet_list = []
 
@@ -402,7 +407,8 @@ def show_shelter_pets():
         shelterpet_list.append(shelter_pet)   
        
     return render_template("shelter_pets.html",
-                            shelterpets=shelterpet_list)                             
+                            shelterpets=shelterpet_list,
+                            shelter_name=shelter_name)                             
 
 
 @app.route("/like-pets.json", methods=["POST"])
@@ -446,6 +452,7 @@ def like_pets():
 
     return jsonify(results)
 
+
 @app.route("/get-liked-pets.json", methods=["GET"])
 def get_liked_pets():
     """Retrieve liked pets from dB."""
@@ -478,7 +485,7 @@ def get_liked_pets():
 def send_alert():
     """Shelter sends SMS updates about saved pets"""
 
-    # TO DO:  Insert user phone in the to area
+    # TO DO:  Insert user phone in the 'to' area
 
     #Create alert message
     message = client.messages.create(
@@ -510,6 +517,22 @@ def respond_to_shelter_alert():
     response.message(message)    
 
     return str(response)
+
+
+@app.route("/receive-sms", methods=["POST"])
+def receive_sms():
+    """User sends text message to shelter about interest in pet"""
+    # Refer to: https://www.twilio.com/blog/2016/09/how-to-receive-and-respond-to-a-text-message-with-python-flask-and-twilio.html    
+
+    # Get data from form
+    number = request.form['From']
+    message_body = request.form['Body']
+    # Acknowledge reciept of sms
+    response = twiml.Response()
+    response.message('Hello {}, we got your message \
+                      which was {}'.format(number, message_body))
+    
+    return str(resp)
 
 
 
