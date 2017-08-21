@@ -261,7 +261,11 @@ function initMap(evt) {
     }); 
     // Construct mailto: so users can email shelter 
     var finalEmail = "<a href=mailto:"+ shelterEmail + ">" 
-                      + "Contact us" + "</a>";
+                      + "Email us" + "</a>";
+    // Added this for text via Twilio
+    var textUs = "Text: 14158703258";
+    // var finalShelterPhone = "Phone: " + shelterPhone;
+                      
     console.log(finalEmail)                  
     var shelterURL = "/shelter-pets?id=";                  
     var finalShelterID = "<a href=" + shelterURL + shelterID + ">"
@@ -272,8 +276,9 @@ function initMap(evt) {
     var html = ('<div class="infowindow-shelters">' +
             '<p>'+ shelterName  + '<br>' + shelterAddr1 + '<br>' +
                    shelterCity  +  ", "  + shelterState +  " "   + 
-                   shelterZip   + '<br>' + 
-                   shelterPhone + '<br>' + '<br>' + 
+                   shelterZip   + '<br>' + "Phone: "    +
+                   shelterPhone + '<br>' +  
+                   textUs       + '<br>' + '<br>'       +
                    finalEmail   + '<br>' +  
               finalShelterID    + '</p>' +                                           
                    '</div>');

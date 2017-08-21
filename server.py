@@ -155,6 +155,8 @@ def logout_json():
     del session["user_id"]
     results = {"success": True,
               "message": "Logged out."}
+
+    # flash('Logged out')          
     
     return jsonify(results)
 
@@ -371,7 +373,7 @@ def process_search_shelters():
         shelter = shelters.next()
         shelter_list.append(shelter)  
 
-    print shelter_list[2]    
+    # print shelter_list[2]    
         
    
     return render_template("shelters_search.html",
@@ -386,12 +388,12 @@ def show_shelter_pets():
 
     # Get shelterID from googlemap infowindow
     shelter_id = request.args.get("id")
-    print shelter_id
+    # print shelter_id
 
     # Get shelter name from googlemap infowindow
     # Display name in shelter_pets.html
     shelter_name = request.args.get("name")
-    print shelter_name
+    # print shelter_name
 
     # Call api and process search, note variables are singular.
     shelter_pets = api.shelter_getpets(id=shelter_id,
@@ -529,7 +531,7 @@ def receive_sms():
     message_body = request.form['Body']
     # Acknowledge reciept of sms
     response = MessagingResponse()
-    response.message('Hello {}, thank you for your interest! We got your message which was "{}". We will get back to you ASAP. ;-)'
+    response.message('Hello {}, thank you for your interest! We got your message, "{}". We will get back to you ASAP. ;-)'
                      .format(number, message_body))
     
     return str(response)
