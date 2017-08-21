@@ -1,14 +1,17 @@
 "use strict"
 
-
 $(document).ready(function(){
-
+  // When user is logged in, show the complete form
+  // Display welcome message all the time
   if ($("#logout-button").prop("hidden") === false ) {
-      $("#when-loggedin").show();
+      $("#when-loggedin").show(); 
+      // $("#welcome-message").removeClass("hidden");
+      // $("#logout-message").hide();   
   }
 
-//Execute login
-//event listener
+
+//Execute login 
+  // This is the event listener
   $("#login-link").click(function(evt) {
     $("#login-modal").modal("show");
   });
@@ -32,22 +35,22 @@ $("#loginmodal-submit").click(doLogin);
             var success = results.success;
             
             if (success === true) {
-                //hide login modal
-                // $("#login-modal").modal("hide");
+                // hide login modal
+                $("#login-modal").modal("hide");
                 
                 //change message to show logged in status
                 //change home page to show saved paws and search shelters
-                
                 $("#logout-button").removeClass("hidden");
                 $("#logout-button").show();
                 $("#login-button").hide(); 
                 $("#when-loggedin").show();  
-                $("#logout-message").hide(); 
                 $("#saved-paws-link").show();
                 $("#search-shelters-link").show(); 
                 window.location.reload();
+                $("#logout-message").removeClass("hidden"); 
                 $("#welcome-message").text("Welcome, " + results.firstname + "!");
-                $("#welcome-message").show();  
+                  
+                $("#welcome-message").removeClass("hidden").addClass("show");
             }
             else {    
                 $("#login-error-message").html(results.message);
@@ -73,7 +76,7 @@ $("#logout-link").click(doLogout);
                 //change message to show logged out status
                 console.log(results.message);
                 $("#welcome-message").hide();
-                $("#logout-message").show();
+                $("#logout-message").addClass("hidden");
                 $("#when-loggedin").hide();
                 $("#logout-button").hide();
                 $("#login-button").removeClass("hidden");

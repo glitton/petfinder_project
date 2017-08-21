@@ -5,9 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PAWS Finder</title>
-  
-  <!-- Bootstrap CSS -->
+
+  <!-- Bootstrap CSS file, in case there is no internet -->
+  <!-- <link rel="stylesheet" type="text/css" href="static/css/bootstrap.css"> -->
+
+  <!-- Bootstrap CSS CDN -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 
   <!-- Google Fonts -->
  <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Open+Sans" rel="stylesheet">
@@ -28,6 +32,7 @@
         <img alt="Brand" src="static/img/paw.png" style="width:30px;height:22px;">
       </a>
     </div>
+    <!-- Left navbar section -->
     <ul class="nav navbar-nav navb">
       <li class="active"><a href="/">Home</a></li>
       
@@ -37,7 +42,10 @@
     {% endif %}  
     </ul>
 
+    <!-- Right navbar section -->
     <ul class="nav navbar-nav navbar-right">
+      <li class='welcome hidden' id="welcome-message"></li>
+      <li class='logout-message hidden' id="logout-message">Logged out</li>
       <li><a href="#" id="register-link"><span class="glyphicon glyphicon-user"></span>Register</a></li>
       
       {% if 'user_id' not in session %}

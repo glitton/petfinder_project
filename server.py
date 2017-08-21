@@ -519,7 +519,7 @@ def respond_to_shelter_alert():
     return str(response)
 
 
-@app.route("/receive-sms", methods=["POST"])
+@app.route("/receive-text", methods=["POST"])
 def receive_sms():
     """User sends text message to shelter about interest in pet"""
     # Refer to: https://www.twilio.com/blog/2016/09/how-to-receive-and-respond-to-a-text-message-with-python-flask-and-twilio.html    
@@ -528,11 +528,11 @@ def receive_sms():
     number = request.form['From']
     message_body = request.form['Body']
     # Acknowledge reciept of sms
-    response = twiml.Response()
-    response.message('Hello {}, we got your message \
-                      which was {}'.format(number, message_body))
+    response = MessagingResponse()
+    response.message('Hello {}, thank you for your interest! We got your message which was "{}". We will get back to you ASAP. ;-)'
+                     .format(number, message_body))
     
-    return str(resp)
+    return str(response)
 
 
 

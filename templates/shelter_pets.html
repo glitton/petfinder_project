@@ -34,19 +34,20 @@
             </div>
           </div>
         </div>
-        Interested in adopting me? Contact my shelter via <a href="mailto:{{ shelterpet.contact['email'] }}">email or <a href='#' id='text-shelter'>text.</a><br>
+        Interested in adopting me? Contact my shelter via <a href="mailto:{{ shelterpet.contact['email'] }}">email</a> or <a href='#' class='text-shelter'>text.</a><br>
         {% if shelterpet["photos"] | length >= 4 %} 
           <img src = "{{ shelterpet.photos[3]['url']}}"><br><br> 
         {% endif %}
 
-                <!-- Text Shelter Modal -->
-        <div class="modal fade ten" tabindex="-1" role="dialog" id="text-shelter">
+        <!-- Text Shelter Modal -->
+        <div class="modal fade ten" tabindex="-1" role="dialog" id="text-shelter-modal">
           <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title modal-shelter">Send Us A Text!</h4>
-                  <h4>1-415-870-3258</h4>
+                <h1 class="modal-title modal-shelter">Text Us: 
+                <br>
+                <span class='text-number'>1-415-870-3258</span></h1>
               </div>
             </div>/<!-- .modal-content -->
           </div>/<!-- .modal-dialog -->

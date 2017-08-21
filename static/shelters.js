@@ -9,4 +9,9 @@ $(document).ready(function(){
     $("#shelter-modal").modal("show");
   });   
 
+  // Show text shelter modal
+  $(".text-shelter").on("click", function(){
+    $("#text-shelter-modal").modal("show");
+  });
+
 }); //end of document ready function

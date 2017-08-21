@@ -35,6 +35,24 @@ header.jumbotron.hero-spacer {
   margin-left: -10px;
 }
 
+/*Welcome message in navbar*/
+.welcome {
+  list-style-type: none;
+  color: white;
+  display: inline-block;
+  margin-top: 15px;
+  margin-left: 400px;
+}
+/*Shows logged out message*/
+/*Default position is relative*/
+.logout-message {
+  list-style-type: none;
+  color: white;
+  display: inline-block;    
+  right: 22px;
+  top: 15px;
+}
+
 /*Registration modal*/
 .password-message {
   position: absolute;
@@ -133,7 +151,11 @@ footer {
 }
 /*Hide form in home page for users not logged in*/
 .hidden { 
-        display:none;
+  display:none;
+}
+
+.show {
+  display: inline-block;
 }
 
 .flash-center {
@@ -214,6 +236,15 @@ label {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
+}
+
+/*Shelter Text Number*/
+.text-number {
+  color: white;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 30px;
+
 }
 
 
