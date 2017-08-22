@@ -148,15 +148,13 @@ def perform_login():
     return jsonify(results) 
 
 
-@app.route("/logout.json")
+@app.route("/logout.json", methods=['POST'])
 def logout_json():
     """Log out."""
 
     del session["user_id"]
     results = {"success": True,
               "message": "Logged out."}
-
-    # flash('Logged out')          
     
     return jsonify(results)
 
@@ -543,7 +541,7 @@ if __name__ == "__main__":
     # that we invoke the DebugToolbarExtension
 
     # Do not debug for demo
-    app.debug = True
+    app.debug = False
     app.jinja_env.auto_reload = app.debug
 
     connect_to_db(app)

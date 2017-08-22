@@ -20,6 +20,7 @@ $("#loginmodal-submit").click(doLogin);
 
   // event handler function
   function doLogin(evt) {
+      evt.preventDefault();
       //get the form values
       var email = $("#login-email-field").val();
       var password = $("#login-password-field").val();
@@ -46,7 +47,7 @@ $("#loginmodal-submit").click(doLogin);
                 $("#when-loggedin").show();  
                 $("#saved-paws-link").show();
                 $("#search-shelters-link").show(); 
-                window.location.reload();
+                // window.location.reload();
                 $("#logout-message").removeClass("hidden"); 
                 $("#welcome-message").text("Welcome, " + results.firstname + "!");
                   
@@ -68,7 +69,7 @@ $("#logout-link").click(doLogout);
   function doLogout(evt) {
 
       //make the AJAX request
-      $.get("/logout.json", function(results){
+      $.post("/logout.json", function(results){
             console.log("results: ", results);
             var success = results.success;
             

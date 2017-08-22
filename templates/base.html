@@ -49,7 +49,7 @@
       <li><a href="#" id="register-link"><span class="glyphicon glyphicon-user"></span>Register</a></li>
       
       {% if 'user_id' not in session %}
-        <li id="login-button"><a href="#" id="login-link"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+        <li id="login-button"><a href="#" id="login-link" data-target="#login-modal"><span class="glyphicon glyphicon-log-in" ></span>Login</a></li>
         <li id="logout-button" class="hidden"><a href="#" id="logout-link"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
       {% endif %}
 
