@@ -48,7 +48,7 @@ $("#loginmodal-submit").click(doLogin);
                 $("#saved-paws-link").show();
                 $("#search-shelters-link").show(); 
                 // window.location.reload();
-                $("#logout-message").removeClass("hidden"); 
+                // $("#logout-message").removeClass("hidden"); 
                 $("#welcome-message").text("Welcome, " + results.firstname + "!");
                   
                 $("#welcome-message").removeClass("hidden").addClass("show");
@@ -67,7 +67,7 @@ $("#loginmodal-submit").click(doLogin);
 $("#logout-link").click(doLogout);
   //event handler
   function doLogout(evt) {
-
+    evt.preventDefault()
       //make the AJAX request
       $.post("/logout.json", function(results){
             console.log("results: ", results);
