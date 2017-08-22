@@ -56,7 +56,7 @@ class Animal(db.Model):
     gender = db.Column(db.String(64), nullable=True)
     pet_id = db.Column(db.Integer, nullable=True)
     size = db.Column(db.String(64), nullable=True)
-    description = db.Column(db.String(2000), nullable=True)
+    description = db.Column(db.String(5000), nullable=True)
     last_update = db.Column(db.DateTime, nullable=True)
 
     shelter = db.relationship("Shelter",
