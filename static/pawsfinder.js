@@ -18,7 +18,7 @@ $("#loginmodal-submit").click(doLogin);
 
   // event handler function
   function doLogin(evt) {
-      evt.preventDefault();
+    evt.preventDefault();
       //get the form values
       var email = $("#login-email-field").val();
       var password = $("#login-password-field").val();
@@ -39,10 +39,11 @@ $("#loginmodal-submit").click(doLogin);
                 
                 //change message to show logged in status
                 //change home page to show saved paws and search shelters
+                //change home page to show expanded form
+                $("#when-loggedin").show();
                 $("#logout-button").removeClass("hidden");
                 $("#logout-button").show();
-                $("#login-button").hide(); 
-                $("#when-loggedin").show();  
+                $("#login-button").hide();   
                 $("#saved-paws-link").show();
                 $("#search-shelters-link").show(); 
                 // window.location.reload();

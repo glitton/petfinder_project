@@ -45,8 +45,9 @@
           {% endfor %}  
           </select>
   </span> 
+    <!-- Show expanded form when user is logged in -->
       {% if 'user_id' in session %}   
-      <span id="when-loggedin" hidden>  
+      <span id="when-loggedin">  
         <label for="inlineFormSize">Size</label>
           <select name="size">
            {% for key, value in sizes.items() %}

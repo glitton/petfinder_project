@@ -7,8 +7,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Animal, Shelter, UserAnimal, UserSearch
 
-import os, sys
-import petfinder
+import os, sys #use for os environ
+import petfinder #petfinder API
 from sqlalchemy import exc # this handles Integrity Errors
 import json
 
@@ -62,7 +62,7 @@ def index():
                   "Basset Hound", "Beagle", "Border Collie", "Boston Terrier",
                   "Boxer", "Bulldog", "Catahoula Leopard Dog", "Cattle Dog", 
                   "Chihuahua", "Cocker Spaniel", "Dachshund", "Dalmatian", "English Bulldog",
-                  "French Bulldog", "German Shepherd", "Great Dane", "Great Pyrenees", "Greyhound",
+                  "French Bulldog", "German Shepherd", "Golden Retriever", "Great Dane", "Great Pyrenees", "Greyhound",
                   "Labrador Retriever", "Mixed Breed", 
                   "Pit Bull Terrier", "Pug", "Staffordshire Terrier", "Yorkshire Terrier"]}
     cat_breeds = {"cats": ["None", "American Shorthair", "Calico", "Domestic Long Hair", 
@@ -486,27 +486,29 @@ def send_alert():
          Type 'Yes' if interested.",
          media_url = ["http://bit.ly/2tlWPcH"])
 
-    return Response("Shelter alert sent!"), 200
+    return Response("Shelter alert sent!", mimetype="text/plain"), 200
 
 
 @app.route("/sms", methods=["GET", "POST"])
 def respond_to_shelter():
     """User response to alert from shelter"""
+    # Based on https://www.twilio.com/docs/guides/how-to-receive-and-reply-in-python#custom-responses-to-incoming-sms-messages
 
-    # Based on users response, message is returned
-    user_text = request.values.get('Body', None)
+    # Capture user response
+    body = request.values.get('Body', None)
+
     # Start TWIML response
-    response = MessagingResponse()
-
-    # Respond to the user 
-    if user_text == "Yes":
+    response = MessagingResponse()  
+    
+    # Based on users response, message is returned
+    if body == "Yes":
         response.message("Contact us for an appointment.")
-    elif user_text == "No":
+    elif body == "No":
         response.message("Have a great day!")
     else:    
-        response.message("Check PAWS Finder for updates.")    
+        response.message("Check PAWS Finder for updates.")  
 
-    return str(response)
+    return Response(str(response), mimetype="text/xml")
 
 
 @app.route("/receive-text", methods=["POST"])
@@ -532,6 +534,9 @@ if __name__ == "__main__":
 
     # Do not debug for demo
     app.debug = True
+    import logging
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.DEBUG)
     app.jinja_env.auto_reload = app.debug
 
     connect_to_db(app)
