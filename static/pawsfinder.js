@@ -2,11 +2,9 @@
 
 $(document).ready(function(){
   // When user is logged in, show the complete form
-  // Display welcome message all the time
   if ($("#logout-button").prop("hidden") === false ) {
       $("#when-loggedin").show(); 
-      // $("#welcome-message").removeClass("hidden");
-      // $("#logout-message").hide();   
+  
   }
 
 

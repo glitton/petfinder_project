@@ -18,6 +18,7 @@ from twilio import twiml #this is for route /receive-sms
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse, Message
 
+
 # Twilio API credentials
 twilio_api_key = os.environ["TWILIO_API_KEY"]
 twilio_api_secret = os.environ["TWILIO_API_SECRET"]
@@ -73,13 +74,6 @@ def index():
                            sizes=sizes, genders=genders,
                            dog_breeds=dog_breeds,
                            cat_breeds=cat_breeds)
-
-#using a modal so don't need this route
-# @app.route("/register", methods=['GET'])
-# def register_form():
-#     """Show form for user signup."""
-
-#     return render_template("register-form2.html")
 
 
 @app.route("/process-registration", methods=['POST']) 
@@ -143,7 +137,6 @@ def perform_login():
               "firstname": user.first_name}     
     
     session["user_id"] = user.user_id
-    
     
     return jsonify(results) 
 
@@ -262,8 +255,7 @@ def process_complete_search():
             pet = pets.next()
             pet_list.append(pet)   
         except: 
-            break    
-
+            break   
 
     # print pet_list[2]
 
@@ -410,7 +402,6 @@ def show_shelter_pets():
                             shelterpets=shelterpet_list,
                             shelter_name=shelter_name)                             
 
-
 @app.route("/like-pets.json", methods=["POST"])
 def like_pets():
     """Save liked pets from search results."""
@@ -498,23 +489,22 @@ def send_alert():
     return Response("Shelter alert sent!"), 200
 
 
-@app.route("/sms", methods=["POST"])
-def respond_to_shelter_alert():
+@app.route("/sms", methods=["GET", "POST"])
+def respond_to_shelter():
     """User response to alert from shelter"""
 
     # Based on users response, message is returned
-    inbound_message = request.values.get("Body", None)
+    user_text = request.values.get('Body', None)
+    # Start TWIML response
+    response = MessagingResponse()
 
     # Respond to the user 
-    if inbound_message == "Yes":
-        message = "Contact us for an appointment."
-    elif inbound_message == "No":
-        message = "Have a great day!"
+    if user_text == "Yes":
+        response.message("Contact us for an appointment.")
+    elif user_text == "No":
+        response.message("Have a great day!")
     else:    
-        message = "Check PAWS Finder for updates."
-
-    response = MessagingResponse()
-    response.message(message)    
+        response.message("Check PAWS Finder for updates.")    
 
     return str(response)
 
@@ -534,7 +524,7 @@ def receive_sms():
     
     return str(response)
 
-
+###############  End of routes
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
