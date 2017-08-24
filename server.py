@@ -495,15 +495,15 @@ def respond_to_shelter():
     # Based on https://www.twilio.com/docs/guides/how-to-receive-and-reply-in-python#custom-responses-to-incoming-sms-messages
 
     # Capture user response
-    body = request.values.get('Body', None)
+    user_text = request.values.get('Body', None)
 
     # Start TWIML response
     response = MessagingResponse()  
     
     # Based on users response, message is returned
-    if body == "Yes":
+    if user_text == "Yes":
         response.message("Contact us for an appointment.")
-    elif body == "No":
+    elif user_text == "No":
         response.message("Have a great day!")
     else:    
         response.message("Check PAWS Finder for updates.")  
