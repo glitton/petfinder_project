@@ -533,7 +533,7 @@ if __name__ == "__main__":
     # that we invoke the DebugToolbarExtension
 
     # Do not debug for demo
-    app.debug = True
+    app.debug = False
     import logging
     log = logging.getLogger('werkzeug')
     log.setLevel(logging.DEBUG)
