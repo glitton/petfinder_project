@@ -104,7 +104,7 @@ You can now navigate to 'localhost:5000/' to access PAWS Finder.
 
 ## <a name="about"></a>About Me
 
-Hi, my name is [Generosa Litton](https://www.linkedin.com/in/glitton) and I am a software engineer. Previously, I was a high-tech marketing director.  I am an engineer at heart, having BS in Electronics Engineering, I decided to add to my toolbox by training as a software engineer at Hackbright Academy. I live in the San Francisco Bay Area and I'm currently seeking a full-time software engineer or developer evangelist role. If you'd like to discuss roles in your organization, feel free to email generosa.litton@yahoo.com.  Thank you!
+Hi, my name is [Generosa Litton](https://www.linkedin.com/in/glitton) and I am a software engineer. Previously, I was a high-tech marketing director.  I am an engineer at heart, having BS in Electronics Engineering, I decided to add to my toolbox by training as a software engineer at Hackbright Academy. I live in the San Francisco Bay Area and I'm currently seeking a full-time software engineer or sales/solutions engineer role. If you'd like to discuss how I can contribute to your organization, feel free to email generosa.litton@yahoo.com.  Thank you!
 
 
 
