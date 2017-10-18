@@ -4,3 +4,7 @@ server.pyc
 secrets.sh
 .DS_Store
 ngrok
+newrelic.ini
+paws_sms.py
+DoNotAdd/
+ubuntu@34.202.124.142
