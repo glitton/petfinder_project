@@ -1,12 +1,14 @@
 "use strict"
 
 $(document).ready(function(){
+
+  alert('This app is still a work in progress and I know that this pop-up window appears when the page refreshes.\n To use this app without registering, enter the following details:\n username:admin@gmail.com password: admin123.\n Otherwise feel free to register for an account. Happy PAWS hunting ;-)');
+
   // When user is logged in, show the complete form
   if ($("#logout-button").prop("hidden") === false ) {
       $("#when-loggedin").show(); 
   
   }
-
 
 //Execute login 
   // This is the event listener
@@ -36,7 +38,7 @@ $("#loginmodal-submit").click(doLogin);
             if (success === true) {
                 // hide login modal
                 $("#login-modal").modal("hide");
-                
+                window.location.reload(true);
                 //change message to show logged in status
                 //change home page to show saved paws and search shelters
                 //change home page to show expanded form
@@ -46,11 +48,12 @@ $("#loginmodal-submit").click(doLogin);
                 $("#login-button").hide();   
                 $("#saved-paws-link").show();
                 $("#search-shelters-link").show(); 
-                // window.location.reload();
-                // $("#logout-message").removeClass("hidden"); 
-                $("#welcome-message").text("Welcome, " + results.firstname + "!");
+                
+                // $("#logout-message").addClass("hidden"); 
+                // $("#welcome-message").text("Welcome, " + results.firstname + "!");
                   
-                $("#welcome-message").removeClass("hidden").addClass("show");
+                // $("#welcome-message").removeClass("hidden").addClass("show");
+                
             }
             else {    
                 $("#login-error-message").html(results.message);
@@ -76,13 +79,13 @@ $("#logout-link").click(doLogout);
                 //change message to show logged out status
                 console.log(results.message);
                 $("#welcome-message").hide();
-                $("#logout-message").addClass("hidden");
                 $("#when-loggedin").hide();
                 $("#logout-button").hide();
                 $("#login-button").removeClass("hidden");
                 $("#login-button").show();
                 $("#saved-paws-link").hide();
                 $("#search-shelters-link").hide();
+                $("#logout-message").removeClass("hidden").addClass("show");
             }
         } //end of callback function
       ); //end of AJAX request

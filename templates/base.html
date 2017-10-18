@@ -44,13 +44,13 @@
 
     <!-- Right navbar section -->
     <ul class="nav navbar-nav navbar-right">
-      <li class='welcome hidden' id="welcome-message"></li>
+      <li class='welcome' id="welcome-message">Logged in</li>
       <li class='logout-message hidden' id="logout-message">Logged out</li>
       <li><a href="#" id="register-link"><span class="glyphicon glyphicon-user"></span>Register</a></li>
       
       {% if 'user_id' not in session %}
         <li id="login-button"><a href="#" id="login-link" data-target="#login-modal"><span class="glyphicon glyphicon-log-in" ></span>Login</a></li>
-        <li id="logout-button" class="hidden"><a href="#" id="logout-link"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+        <li id="logout-button logout-link" class="hidden"><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
       {% endif %}
 
       {% if 'user_id' in session %}
