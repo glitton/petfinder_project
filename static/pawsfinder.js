@@ -1,13 +1,19 @@
 "use strict"
 
 $(document).ready(function(){
-
-  alert('This app is still a work in progress and I know that this pop-up window appears when the page refreshes.\n To use this app without registering, enter the following details:\n username:admin@gmail.com password: admin123.\n Otherwise feel free to register for an account. Happy PAWS hunting ;-)');
+  // Show this alert for the first time only
+    $('.alert-message').one('click', function () {
+      alert("This app is still a work in progress.\n To use this app without registering, enter the following:\n username:admin@gmail.com password: admin123.\n Or feel free to register for an account. Happy PAWS Finding ;-)");
+    });            
+  // var alerted = localStorage.getItem('alerted') || '';
+  //   if (alerted != 'yes') {
+  //      alert('This app is still a work in progress and I know that this pop-up window appears when the page refreshes.\n To use this app without registering, enter the following details:\n username:admin@gmail.com password: admin123.\n Otherwise feel free to register for an account. Happy PAWS hunting ;-)');
+  //    localStorage.setItem('alerted','yes');
+  //   }
 
   // When user is logged in, show the complete form
   if ($("#logout-button").prop("hidden") === false ) {
       $("#when-loggedin").show(); 
-  
   }
 
 //Execute login 
@@ -36,6 +42,8 @@ $("#loginmodal-submit").click(doLogin);
             var success = results.success;
             
             if (success === true) {
+                
+                $("#login-message").removeClass("hidden").addClass("show");
                 // hide login modal
                 $("#login-modal").modal("hide");
                 window.location.reload(true);
@@ -48,6 +56,7 @@ $("#loginmodal-submit").click(doLogin);
                 $("#login-button").hide();   
                 $("#saved-paws-link").show();
                 $("#search-shelters-link").show(); 
+
                 
                 // $("#logout-message").addClass("hidden"); 
                 // $("#welcome-message").text("Welcome, " + results.firstname + "!");

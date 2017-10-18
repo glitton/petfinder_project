@@ -41,7 +41,8 @@ header.jumbotron.hero-spacer {
   color: white;
   display: inline-block;
   margin-top: 15px;
-  margin-left: 400px;
+  /*margin-left: 400px;*/
+  left: -20px;
 }
 /*Shows logged out message*/
 /*Default position is relative*/

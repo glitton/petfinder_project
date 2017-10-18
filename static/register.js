@@ -29,9 +29,7 @@ $(document).ready(function(){
         message.innerHTML = "&#10004"; 
         document.getElementById("signup-btn").disabled = false;
         // $('.btn').prop('disabled', false); jQuery version
-      } 
-    
-    else {
+      } else {
         //The passwords do not match.
         //Set the color to the bad color and notify the user.
         password2.style.backgroundColor = badPassword;
@@ -45,7 +43,7 @@ $(document).ready(function(){
   // When reset btn in signup form is clicked, form should have no colors
   $('#cancel-signup').click(function(){
     var message = document.getElementById('confirm-message');
-    var pass2Color = document.getElementById('inputPass2');
+    var pass2Color = document.getElementById('confirm-password');
     pass2Color.style.backgroundColor = '#ffffff';
     message.style.visibility = 'hidden';
   });
