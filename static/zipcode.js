@@ -8,7 +8,7 @@ $(document).ready(function(){
     // Heroku app client key
     // var clientKey = "8BGWozMytsnnbsinhVJ0c7HPSWF0zMG5bLTLZf6OZFOiTC8oDt4VodD6DLlBU723"
 
-    //Heroku.com key
+    //Heroku.com website key
     var clientKey ="js-M2Or8S0XcxVnfkxg4IAkuZ8mCYxvew42KLgvuCQ9CYhKtCIvRpSq3Ss1WrcEBKL4"
     
     var cache = {};
