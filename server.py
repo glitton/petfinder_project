@@ -38,6 +38,11 @@ api_secret = os.environ["PETFINDER_API_SECRET"]
 # Instantiate petfinder api with my credentials
 api = petfinder.PetFinderClient(api_key=api_key, 
                                 api_secret=api_secret)
+
+# For Heroku Deployment
+SECRET_KEY = "ABCDEFG"
+SECRET_KEY = os.environ.get(“FLASK_SECRET_KEY”, “ABCDEF”)
+
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -543,5 +548,6 @@ if __name__ == "__main__":
 
     # Use the DebugToolbar
     DebugToolbarExtension(app)
+    DEBUG = "NO_DEBUG" not in os.environ
     PORT = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=PORT)
+    app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
