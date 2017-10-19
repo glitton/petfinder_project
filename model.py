@@ -236,7 +236,7 @@ if __name__ == "__main__":
     app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     connect_to_db(app)
-    print "Connected to DB."
+    # print "Connected to DB."
     db.create_all()
 
 # 'postgres://qsqzlgdznbjxvf:072dfc1568a6f9acdd4c62c16852f59b8ad162480681c6fe990819473e76c199@ec2-50-17-203-195.compute-1.amazonaws.com:5432/da2h032ncjp5do' 
