@@ -3,7 +3,10 @@
 $(document).ready(function(){
   $(function() {
     // IMPORTANT: Fill in your client key
-    var clientKey = "js-kWKYUb68qGd30rF073cxetS0EA96c6lw25uXhB5HhiLhKqiRtupIYhJCRSI4Y4A1";
+    // var clientKey = "js-kWKYUb68qGd30rF073cxetS0EA96c6lw25uXhB5HhiLhKqiRtupIYhJCRSI4Y4A1";
+
+    // Heroku app client key
+    var clientKey = "8BGWozMytsnnbsinhVJ0c7HPSWF0zMG5bLTLZf6OZFOiTC8oDt4VodD6DLlBU723"
     
     var cache = {};
     var container = $(".form-group");
