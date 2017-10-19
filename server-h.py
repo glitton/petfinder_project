@@ -541,8 +541,8 @@ if __name__ == "__main__":
     log.setLevel(logging.DEBUG)
     app.jinja_env.auto_reload = app.debug
 
-    # connect_to_db(app, os.environ.get("DATABASE_URL"))
-    connect_to_db(app)
+    connect_to_db(app, os.environ.get("DATABASE_URL"))
+    # connect_to_db(app)
 
     # Use the DebugToolbar
     DebugToolbarExtension(app)
