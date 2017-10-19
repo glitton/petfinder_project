@@ -1,4 +1,5 @@
 """Paws Finder. Uses Flask, Jinja, AJAX and JSON"""
+# Heroku Version
 
 from jinja2 import StrictUndefined
 
