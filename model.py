@@ -221,7 +221,8 @@ def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     # Configure to use our PostgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///pawsfinder'
+    app.config['SQLALCHEMY_DATABASE_URI'] = postgres://qsqzlgdznbjxvf:072dfc1568a6f9acdd4c62c16852f59b8ad162480681c6fe990819473e76c199@ec2-50-17-203-195.compute-1.amazonaws.com:5432/da2h032ncjp5do or 
+    'postgresql:///pawsfinder'
     db.app = app
     db.init_app(app)
 

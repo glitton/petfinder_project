@@ -39,10 +39,6 @@ api_secret = os.environ["PETFINDER_API_SECRET"]
 api = petfinder.PetFinderClient(api_key=api_key, 
                                 api_secret=api_secret)
 
-# For Heroku Deployment
-# SECRET_KEY = "ABCDEFG"
-# SECRET_KEY = os.environ.get(“FLASK_SECRET_KEY”)
-
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -544,7 +540,7 @@ if __name__ == "__main__":
     log.setLevel(logging.DEBUG)
     app.jinja_env.auto_reload = app.debug
 
-    connect_to_db(app)
+    connect_to_db(app, os.environ.get("DATABASE_URL"))
 
     # Use the DebugToolbar
     DebugToolbarExtension(app)
