@@ -40,8 +40,8 @@ api = petfinder.PetFinderClient(api_key=api_key,
                                 api_secret=api_secret)
 
 # For Heroku Deployment
-SECRET_KEY = "ABCDEFG"
-SECRET_KEY = os.environ.get(“FLASK_SECRET_KEY”, “ABCDEF”)
+# SECRET_KEY = "ABCDEFG"
+# SECRET_KEY = os.environ.get(“FLASK_SECRET_KEY”)
 
 app = Flask(__name__)
 
