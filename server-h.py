@@ -13,12 +13,13 @@ import os, sys #use for os environ
 import petfinder #petfinder API
 from sqlalchemy import exc # this handles Integrity Errors
 import json
+import newrelic
 
 # Twilio SMS API
-from twilio import twiml #this is for route /receive-sms
+#from twilio import twiml #this is for route /receive-sms
 #This is for the send-alert route
-from twilio.rest import Client
-from twilio.twiml.messaging_response import MessagingResponse, Message
+# from twilio.rest import Client
+# from twilio.twiml.messaging_response import MessagingResponse, Message
 
 
 # Twilio API credentials
@@ -117,7 +118,7 @@ def perform_login():
 
     # Get credentials from form
     email = request.form.get("email")
-    print "Capturing email for new relic ", email
+    # print "Capturing email for new relic ", email
     newrelic.agent.add_custom_parameter("email", email)
     password = request.form.get("password")
     user = User.query.filter_by(email=email).first()
