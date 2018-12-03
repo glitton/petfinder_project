@@ -21,7 +21,7 @@ itsdangerous==0.24
 Jinja2==2.9.6
 lxml==3.7.3
 MarkupSafe==1.0
-newrelic==2.94.0.79
+newrelic==4.6.0.106
 packaging==16.8
 passlib==1.7.1
 pathlib2==2.2.1
