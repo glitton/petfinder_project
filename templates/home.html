@@ -9,7 +9,7 @@
 <header class="jumbotron hero-spacer">
   <!-- <p id="welcome-message" hidden></p> -->
   <!-- <p id="logout-message" hidden>Logged out</p> -->
-  
+
   <div id="saved-title"></div>
   <h1>Welcome To PAWS Finder</h1>
   <p>Where Pets And Wonderful Shelters Are Just a Click Away!</p>
@@ -21,46 +21,46 @@
       <form class="form-inline"
         {% if "user_id" in session %}
           action="/search-complete"
-        {% else %} 
+        {% else %}
           action="/search"
         {% endif %}
           method="GET">
-        <label for="inlineFormZipcode">Zip code</label>  
+        <label for="inlineFormZipcode">Zip code</label>
           <input type="text" name="zipcode" placeholder="94114" maxlength="5" size="6" required>
-        <label for="inlineFormCity">City</label> 
+        <label for="inlineFormCity">City</label>
           <input type="text" name="city" maxlength="18" size="18" placeholder="San Francisco">
-        <label for="inlineFormState">State</label>                
+        <label for="inlineFormState">State</label>
           <input type="text" name="state" maxlength="2" size="3" placeholder="CA">
         <label for="inlineFormPet">Pet</label>
           <select id="animal-type" name="animal" required>
             {% for animal in animals %}
               <option value="{{ animal }}">{{ animal }}</option>
-            {% endfor %}  
+            {% endfor %}
           </select>
-          
+
         <label for="inlineFormGender">Gender</label>
           <select name="gender">
           {% for kgender, vgender in genders.items() %}
             <option value="{{ kgender }}">{{ vgender }}</option>
-          {% endfor %}  
+          {% endfor %}
           </select>
-  </span> 
+  </span>
     <!-- Show expanded form when user is logged in -->
-      {% if 'user_id' in session %}   
-      <span id="when-loggedin">  
+      {% if 'user_id' in session %}
+      <span id="when-loggedin">
         <label for="inlineFormSize">Size</label>
           <select name="size">
            {% for key, value in sizes.items() %}
             <option value="{{ key }}">{{ value }}</option>
-           {% endfor %}     
-          </select> 
+           {% endfor %}
+          </select>
 
         <label for="inlineFormAge">Age</label>
         <select name="age">
          {% for age in ages %}
           <option value="{{ age }}">{{ age.lower() }}</option>
-         {% endfor %}     
-        </select> 
+         {% endfor %}
+        </select>
 
         <label for="inlineFormBreed">Breed</label>
         <select class="breeds" name="dog-breeds" id="dogs">
@@ -72,53 +72,46 @@
           {% for vcat in cat_breeds["cats"] %}
           <option value="{{ vcat }}">{{ vcat }}</option>
           {% endfor %}
-        </select>              
+        </select>
       </span>
       {% endif %}
       <br>
       <br>
       <button type="submit" class="btn btn-primary">Search</button>
     </form>
-  </div> 
+  </div>
 </header>
-
+<!-- Search bar performance mark -->
+<script>
+  window.performance && window.performance.mark('searchDoneLoading');
+</script>
+<!-- End of Search bar performance mark -->
 <!-- Page Features -->
 <div class="row text-center">
-
 <div class="container">
  <br>
   <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
-
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-
       <div class="item active">
         <img src="static/pics/cat-animal-cat-portrait-mackerel.jpg" alt="cat-blue-eyes">
       </div>
-
       <div class="item">
         <img src="static/pics/pexels-photo-115025.jpeg" alt="dog-beach">
       </div>
-
       <div class="item">
         <img src="static/pics/cat-sweet-kitty-animals-57416.jpeg" alt="cat-tongue">
       </div>
-
       <div class="item">
         <img src="static/pics/cat-young-cat-playful-pet-64147.jpeg" alt="kittens-purple">
       </div>
-
       <div class="item">
         <img src="static/pics/pexels-photo-171297.jpeg" alt="french-bulldog">
       </div>
-  
       <div class="item">
         <img src="static/pics/theme-candid-portraits-smile-woman-girl-40064.jpeg" alt="Girl-dog">
       </div>
-
-
     </div>
-
     <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -128,12 +121,14 @@
       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div>        
-</div>   
+  </div>
+  <!-- Carousel performance mark -->
+  <script>
+    window.performance && window.performance.mark('carouselDoneLoading');
+  </script>
+</div>
 <!-- /.row -->
-
 <hr>
-
 </div>
 
 <!-- Footer -->
