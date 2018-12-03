@@ -1,5 +1,6 @@
 """Paws Finder. Uses Flask, Jinja, AJAX and JSON"""
 # Heroku Version
+# Dec. 3, added custom attribute to capture email in new relic
 
 from jinja2 import StrictUndefined
 
