@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- Dec. 3, 2018 Updated with browser and APM attributes -->
 <html>
 <head>
   <meta charset="utf-8">
@@ -14,11 +15,11 @@
 
   <!-- Google Fonts -->
  <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Open+Sans" rel="stylesheet">
-  
+
   <!-- my CSS  -->
-  <link rel="stylesheet" type="text/css" href="static/css/pawsfinder.css">  
+  <link rel="stylesheet" type="text/css" href="static/css/pawsfinder.css">
   <!-- Favicon -->
-  <link rel="icon" href="static/img/paw-favicon.ico" type="image/gif" sizes="16x16">            
+  <link rel="icon" href="static/img/paw-favicon.ico" type="image/gif" sizes="16x16">
 </head>
 
 <body>
@@ -34,11 +35,11 @@
     <!-- Left navbar section -->
     <ul class="nav navbar-nav navb">
       <li class="active"><a href="/">Home</a></li>
-      
-    {% if 'user_id' in session %} 
-      <li class="active" id="saved-paws-link"><a href="#" id="saved-searches">Saved Paws</a></li>    
+
+    {% if 'user_id' in session %}
+      <li class="active" id="saved-paws-link"><a href="#" id="saved-searches">Saved Paws</a></li>
       <li class="active" id="search-shelters-link"><a href="#" id="shelter-link">Search Shelters</a></li>
-    {% endif %}  
+    {% endif %}
     </ul>
 
     <!-- Right navbar section -->
@@ -46,7 +47,7 @@
       <li class='welcome hidden' id="welcome-message">Logged in</li>
       <li class='logout-message hidden' id="logout-message">Logged out</li>
       <li class="alert-message"><a href="#register-modal" id="register-link"><span class="glyphicon glyphicon-user"></span>Register</a></li>
-      
+
       {% if 'user_id' not in session %}
         <li id="login-button"><a href="#" id="login-link" data-target="#login-modal"><span class="glyphicon glyphicon-log-in" ></span>Login</a></li>
         <li id="logout-button logout-link" class="hidden"><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
@@ -55,14 +56,14 @@
       {% if 'user_id' in session %}
         <li id="logout-button"><a href="#" id="logout-link"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
         <li id="login-button" class="hidden"><a href="#" id="login-link"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-      {% endif %}> 
+      {% endif %}>
     </ul>
   </div>
 </nav>
- 
+
     {% for flash in get_flashed_messages() %}
     <div class="flash-center">
-      {{ flash }} 
+      {{ flash }}
     </div>
     {% endfor %}
 
@@ -100,14 +101,14 @@
             <div class="form-group">
               <input type="text" class='login' id="login-email-field" name="email" placeholder="Email"><br>
             </div>
-            <div class="form-group">  
-              <input type="password" class='login' id="login-password-field" name="password" placeholder="Password"><br>  
-            </div>        
+            <div class="form-group">
+              <input type="password" class='login' id="login-password-field" name="password" placeholder="Password"><br>
+            </div>
               <div class="modal-footer">
                 <button type="reset" class="btn btn-default" id='loginmodal-cancel'>Cancel</button>
                 <button type="submit" class="btn btn-primary btn-login" id='loginmodal-submit'>Login</button>
-              </div>                 
-          </form>  
+              </div>
+          </form>
           <!-- Add this later -->
 <!--           <div class="login-help">
             <a href="#">Register</a> - <a href="#">Forgot Password</a>
@@ -129,20 +130,20 @@
       </div>
       <div class="modal-body three">
         <form action="/process-registration" method="POST">
-          
+
           <div class="row">
             <!-- First name field -->
             <p id="registration-status"></p>
               <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                <input type="text" name="firstname" id="firstname-field" 
+                <input type="text" name="firstname" id="firstname-field"
                 class="form-control input-sm" placeholder="First Name">
                 </div>
               </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
               <!-- Last name field -->
               <div class="form-group">
-                <input type="text" name="lastname" id="lastname-field" 
+                <input type="text" name="lastname" id="lastname-field"
                 class="form-control input-sm" placeholder="Last Name">
               </div>
             </div>
@@ -152,25 +153,25 @@
             <!-- Email Field -->
             <div class="col-xs-6 col-sm-6 col-md-6">
               <div class="form-group">
-                <input type="email" name="email" id="email-field" 
+                <input type="email" name="email" id="email-field"
                 class="form-control input-sm" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Invalid input. Email must contain a domain in the form of @domain.com." placeholder="Email Address">
               </div>
-            </div> 
+            </div>
             <!-- Phone Field -->
             <div class="col-xs-6 col-sm-6 col-md-6">
               <div class="form-group">
-                <input type="tel" name="phone" id="phone-field" 
+                <input type="tel" name="phone" id="phone-field"
                 class="form-control input-sm"
                 pattern="\+\d{1}\d{3}\d{3}\d{4}" placeholder="Mobile phone  +14158881212" title="Invalid input, please use the format +14158881212">
               </div>
-            </div>            
+            </div>
           </div>
-        
+
           <div class="row">
             <!-- Password field -->
             <div class="col-xs-6 col-sm-6 col-md-6">
               <div class="form-group">
-                <input type="password" name="password" id="password-field" 
+                <input type="password" name="password" id="password-field"
                 class="form-control input-sm" pattern=".{6,}" title="Six or more characters" placeholder="Password requires 6 or more characters" title="Invalid input, password must contain 6 or more characters.">
               </div>
             </div>
@@ -180,8 +181,8 @@
               </div>
               <div class="password-message" id="confirm-message"></div>
             </div>
-          </div>   
-                 
+          </div>
+
           <div class="modal-footer">
             <button type="reset" class="btn btn-default" id='cancel-signup'>Cancel</button>
             <button type="submit" class="btn btn-primary" id='signup-btn'>Submit</button>
@@ -227,10 +228,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   <!-- my javascript -->
-  <script src="static/register.js"></script> 
-  <script src="static/pawsfinder.js"></script> 
-  <script src="static/savedpaws.js"></script> 
-  <script src="static/shelters.js"></script> 
+  <script src="static/register.js"></script>
+  <script src="static/pawsfinder.js"></script>
+  <script src="static/savedpaws.js"></script>
+  <script src="static/shelters.js"></script>
   <script src="static/zipcode.js"></script>
 
 </body>
