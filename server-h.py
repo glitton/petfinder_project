@@ -1,6 +1,7 @@
 """Paws Finder. Uses Flask, Jinja, AJAX and JSON"""
 # Heroku Version
 # Dec. 3, added custom attribute to capture email in new relic
+# Dec. 15 removed Twilio info
 
 from jinja2 import StrictUndefined
 
@@ -13,21 +14,7 @@ import os, sys #use for os environ
 import petfinder #petfinder API
 from sqlalchemy import exc # this handles Integrity Errors
 import json
-import newrelic
-
-# Twilio SMS API
-#from twilio import twiml #this is for route /receive-sms
-#This is for the send-alert route
-# from twilio.rest import Client
-# from twilio.twiml.messaging_response import MessagingResponse, Message
-
-
-# Twilio API credentials
-# twilio_api_key = os.environ["TWILIO_API_KEY"]
-# twilio_api_secret = os.environ["TWILIO_API_SECRET"]
-
-#Create TWILIO client object
-# client = Client(twilio_api_key, twilio_api_secret)
+import newrelic.agent
 
 #add password hash using sha256_crypt
 from passlib.hash import sha256_crypt
