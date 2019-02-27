@@ -5,7 +5,7 @@
 
 <div class="container">
     <h2>Your Search: {{ sizes[size].capitalize() }} {{ genders[gender] }} {{ breed.lower() }} {{ animal }} in location {{ location }}.</h2>
-    
+
       <h3 id="save-status"> Check to save this search
         <input id="save-box" type="checkbox" name="searches" value="Yes"/>
       </h3>
@@ -20,26 +20,25 @@
         <label class='save-description'>
             Description <input id="saved-description" type="text" name="description">
         </label>
-      <input class='btn btn-primary btn-sm save-search-btn' id="save-search-button" type="submit" value="Save"> 
+      <input class='btn btn-primary btn-sm save-search-btn' id="save-search-button" type="submit" value="Save">
       </form>
-    </p>
   </div>
   <div class="row">
-    {% if "user_id" in session %}  
+    {% if "user_id" in session %}
         {% for pet in pets %}
 
           <div id="img-height" class="img-rounded col-xs-12 col-md-6 col-lg-4">
            <!--   Like button code include data attributes,enabling users to save a specific pet    -->
             <button type="button" {% if pet.id in liked_petid %}
-            class="btn btn-success btn-xs active like fa-beat" 
+            class="btn btn-success btn-xs active like fa-beat"
             {% else %}
-            class="btn btn-primary btn-xs active like" 
+            class="btn btn-primary btn-xs active like"
             {% endif %}
 
             id="{{ pet.id }}"
 
-              data-shelterId="{{ pet.shelterId }}" 
-              data-animal="{{ pet.animal }}"  
+              data-shelterId="{{ pet.shelterId }}"
+              data-animal="{{ pet.animal }}"
               data-petname="{{ pet.name }}"
               data-breeds="{{ pet.breeds }}"
               data-age="{{ pet.age }}"
@@ -50,12 +49,12 @@
               data-lastupdate="{{ pet.lastUpdate }}">
 
             <span class="glyphicon glyphicon-heart"></span>
-            </button> 
+            </button>
 
-            Hi, my name is {{ pet.name.capitalize() }}! 
+            Hi, my name is {{ pet.name.capitalize() }}!
             <a href="#" id="learn-more-{{ pet.id }}">Learn more about me.</a>
             <br>
-  
+
         <div class="modal fade 5" id="learn-more-modal-{{ pet.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -75,18 +74,18 @@
           </div>
         </div>
 
-            Interested in adopting me? 
+            Interested in adopting me?
                 Contact my shelter via <a href="mailto:{{ pet.contact['email'] }}">email</a> or <a href='#' class='text-shelter'>text.</a>
                 <br>
                 <br>
-          {% if pet["photos"] | length >= 4 %} 
+          {% if pet["photos"] | length >= 4 %}
           <!-- this is the jinja  way for finding length -->
-                <img id="pet-img" class="img-responsive img-rounded" src = "{{ pet.photos[3]['url']}}"><br><br> 
-            {% endif %}  
-            </div> 
+                <img id="pet-img" class="img-responsive img-rounded" src = "{{ pet.photos[3]['url']}}"><br><br>
+            {% endif %}
+            </div>
           {% endfor %}
-      {% endif %}           
-    </div>  
+      {% endif %}
+    </div>
 </div>
 
         <!-- Text Shelter Modal -->
@@ -95,7 +94,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1 class="modal-title modal-shelter">Text Us: 
+                <h1 class="modal-title modal-shelter">Text Us:
                 <br>
                 <span class='text-number'>1-415-870-3258</span></h1>
               </div>
@@ -109,7 +108,7 @@
 </script>
 
 <!-- <!- Revisit and fix -->
-<script type="text/javascript"> 
+<script type="text/javascript">
 // Loop through pet API, get pet id and invoke function learnMore
  {% for pet in pets %}
   learnMore({{ pet.id }})

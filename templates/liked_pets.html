@@ -5,11 +5,11 @@
 <div class="container">
   <h2>MEET OUR PETS</h2>
   <div class="row">
-  <p>{% for shelterpet in shelterpets %}
+  <p>{% for shelterpet in shelterpets %}</p>
     <div class="col-xs-12 col-md-6 col-lg-4">
       Hi, my name is {{ shelterpet.name.capitalize() }}!
         <a href="#{{ shelterpet.name }}" data-toggle="modal">Learn more about me.</a>
-        <br>      
+        <br>
         <!-- Shelter Pet Description Modal no js on this one-->
         <div class="modal fade" id="{{ shelterpet.name }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -29,15 +29,14 @@
             </div>
           </div>
         </div>
-        Interested in adopting me? 
+        Interested in adopting me?
             <a href="mailto:{{ shelterpet.contact['email'] }}">Contact my shelter.</a><br>
-        {% if shelterpet["photos"] | length >= 4 %} 
-          <img src = "{{ shelterpet.photos[3]['url']}}"><br><br> 
+        {% if shelterpet["photos"] | length >= 4 %}
+          <img src = "{{ shelterpet.photos[3]['url']}}"><br><br>
         {% endif %}
-        
-    </div> 
+
+    </div>
     {% endfor %}
-  </p>
 
  </div>
 </div>

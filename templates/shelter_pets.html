@@ -5,16 +5,16 @@
 <div class="container">
   <h2><!-- We are {{ shelter_name }}. -->  Meet Our Pets!</h2>
   <div class="row">
-  <p>{% for shelterpet in shelterpets %}
+  <p>{% for shelterpet in shelterpets %}</p>
     <div class="col-xs-12 col-md-6 col-lg-4">
 
-      <button type="button" class="btn btn-primary btn-xs active like"> 
+      <button type="button" class="btn btn-primary btn-xs active like">
       <span class="glyphicon glyphicon-heart"></span>
-      </button> 
+      </button>
 
       Hi, my name is {{ shelterpet.name.capitalize() }}!
         <a href="#{{ shelterpet.name }}" data-toggle="modal">Learn more about me.</a>
-        <br>      
+        <br>
         <!-- Shelter Pet Description Modal no js on this one-->
         <div class="modal fade" id="{{ shelterpet.name }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -35,8 +35,8 @@
           </div>
         </div>
         Interested in adopting me? Contact my shelter via <a href="mailto:{{ shelterpet.contact['email'] }}">email</a> or <a href='#' class='text-shelter'>text.</a><br>
-        {% if shelterpet["photos"] | length >= 4 %} 
-          <img src = "{{ shelterpet.photos[3]['url']}}"><br><br> 
+        {% if shelterpet["photos"] | length >= 4 %}
+          <img src = "{{ shelterpet.photos[3]['url']}}"><br><br>
         {% endif %}
 
         <!-- Text Shelter Modal -->
@@ -45,20 +45,17 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1 class="modal-title modal-shelter">Text Us: 
+                <h1 class="modal-title modal-shelter">Text Us:
                 <br>
                 <span class='text-number'>1-415-870-3258</span></h1>
               </div>
             </div>/<!-- .modal-content -->
           </div>/<!-- .modal-dialog -->
         </div><!--.modal  -->
-        
-    </div> 
+
+    </div>
     {% endfor %}
-  </p>
 
  </div>
 </div>
 {% endblock %}
-
-
